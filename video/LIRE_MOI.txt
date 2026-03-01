@@ -1,0 +1,5 @@
+Déposez vos vidéos ici avec ces noms exacts :
+  - locks5.mp4
+  - locks6.mp4
+
+Format recommandé : MP4 (H.264), résolution 720p max pour le web.

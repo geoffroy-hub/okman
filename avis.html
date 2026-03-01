@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Témoignages clients — MiraLocks</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta name="description" content="Avis et témoignages de nos clients – Institut MiraLocks, salon de locks à Lomé, Togo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.miralocks.com/avis.html">
+<meta property="og:title" content="Témoignages – Institut MiraLocks | Avis clients">
+<meta property="og:description" content="Découvrez ce que nos clients disent de l'Institut MiraLocks – Salon de locks à Lomé, Togo.">
+<meta property="og:image" content="https://www.miralocks.com/assets/logo.png">
+<meta property="og:locale" content="fr_TG">
+<meta property="og:site_name" content="Institut MiraLocks">
+<link rel="canonical" href="https://www.miralocks.com/avis.html">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#c9a84c">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/optimize.css">
+<script src="js/dynamic-colors.js"></script>
+<style>
+  .avis-hero {
+    background: linear-gradient(135deg, #0c3320, #1b6b45);
+    padding: 64px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  .avis-hero h2 { color: var(--gold, #c9a84c); font-size: clamp(1.7rem,4vw,2.5rem); margin-bottom: 12px; }
+  .avis-hero p  { color: rgba(255,255,255,.85); font-size: 1.05rem; max-width: 520px; margin: 0 auto; }
+
+  .rating-global {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+  .rating-big { font-size: 4rem; font-weight: 900; color: var(--gold, #c9a84c); line-height: 1; }
+  .rating-stars { font-size: 1.8rem; color: var(--gold, #c9a84c); }
+  .rating-info { color: rgba(255,255,255,.7); font-size: .9rem; margin-top: 4px; }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .testimonial-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 4px 16px rgba(12,50,32,.08);
+    border: 1px solid var(--gray-200, #dceee4);
+    position: relative;
+    transition: transform .3s, box-shadow .3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .testimonial-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(12,50,32,.14); }
+  .testimonial-card .quote-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--gold, #c9a84c);
+    margin-bottom: 12px;
+    opacity: .6;
+  }
+  .testimonial-card .stars { color: var(--gold, #c9a84c); font-size: 1.1rem; margin-bottom: 14px; }
+  .testimonial-card .content {
+    font-size: .97rem;
+    color: var(--gray-700, #253d30);
+    line-height: 1.8;
+    flex: 1;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testimonial-card .author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .author-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--gold-gradient, linear-gradient(135deg,#c9a84c,#e8d080));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #0c3320;
+    flex-shrink: 0;
+  }
+  .author-info .name { font-weight: 700; color: var(--text, #0c2818); font-size: .95rem; }
+  .author-info .service { font-size: .82rem; color: var(--muted, #5a7a66); margin-top: 2px; }
+  .author-info .date   { font-size: .78rem; color: var(--gray-400, #8aad99); }
+  .badge-verified {
+    position: absolute;
+    top: 16px; right: 16px;
+    background: var(--emerald-soft, #e8f5ee);
+    color: var(--emerald, #1b6b45);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: .72rem;
+    font-weight: 700;
+    border: 1px solid var(--gray-200);
+  }
+
+  .stats-bar {
+    background: var(--gray-100, #f0f7f3);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 40px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 24px;
+    text-align: center;
+  }
+  .stat-item .value { font-size: 2.2rem; font-weight: 900; color: var(--gold, #c9a84c); line-height: 1; }
+  .stat-item .label { font-size: .88rem; color: var(--muted, #5a7a66); margin-top: 6px; }
+
+  .share-form {
+    background: linear-gradient(135deg, #0c3320, #1b6b45);
+    border-radius: 16px;
+    padding: 40px;
+    margin-top: 48px;
+    color: #fff;
+    text-align: center;
+  }
+  .share-form h3 { color: var(--gold, #c9a84c); margin-bottom: 10px; font-size: 1.3rem; }
+  .share-form p  { color: rgba(255,255,255,.8); margin-bottom: 28px; line-height: 1.7; }
+  .share-form-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .share-form-btns a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 24px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .3s;
+    font-size: .95rem;
+  }
+  .btn-wa    { background: var(--gold, #c9a84c); color: #0c3320; }
+  .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,.4); }
+  .btn-google { border: 2px solid rgba(255,255,255,.4); color: #fff; }
+  .btn-google:hover { background: rgba(255,255,255,.1); }
+
+  @media (max-width: 767px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .avis-hero { padding: 40px 16px; }
+    .share-form { padding: 28px 20px; }
+    .stats-bar { padding: 24px; gap: 16px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Institut MiraLocks",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "47",
+    "bestRating": "5"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {"@type": "Person", "name": "Afi K."},
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "reviewBody": "Excellente expérience ! Mes locks sont magnifiques et bien entretenues. Mira est très professionnelle et attentionnée. Je recommande vivement !"
+    },
+    {
+      "@type": "Review",
+      "author": {"@type": "Person", "name": "Kofi A."},
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "reviewBody": "Service impeccable, cadre agréable. Mes locks sont parfaites depuis 1 an grâce à MiraLocks. Merci !"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- Bandeau téléphone cliquable -->
+<div style="background:var(--gold,#c9a84c);color:#0c3320;text-align:center;padding:6px 16px;font-size:.82rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+  <span>📞 <a href="tel:+22897989001" style="color:#0c3320;font-weight:700;text-decoration:none">+228 97 98 90 01</a></span>
+  <span>•</span>
+  <span>💬 <a href="https://wa.me/22897989001" target="_blank" style="color:#0c3320;font-weight:700;text-decoration:none">WhatsApp</a></span>
+  <span>•</span>
+  <span>🕐 Mar–Sam : 08h–18h</span>
+</div>
+
+<a href="#main-content" class="skip-to-content" style="position:absolute;top:-100px;left:16px;background:var(--gold,#c9a84c);color:#0c3320;padding:10px 20px;border-radius:0 0 8px 8px;font-weight:700;z-index:99999;transition:top .2s;text-decoration:none" onblur="this.style.top='-100px'" onfocus="this.style.top='0'">Aller au contenu principal</a>
+
+<header class="header">
+  <div class="container">
+    <div class="brand">
+      <img src="assets/logo-transparent.png" alt="MiraLocks Logo" width="48" height="48" loading="eager">
+      <div><h1>MiraLocks</h1></div>
+    </div>
+    <button class="hamburger-menu" id="hamburger-btn" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="gallery.html">Galerie</a>
+      <a href="blog.html">Blog</a>
+      <a href="services.html">Services</a>
+      <a href="rendezvous.html">Rendez‑vous</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <a href="avis.html" aria-current="page" class="active">Avis</a>
+      <a href="about.html">À propos</a>
+    </nav>
+  </div>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<main id="main-content">
+  <div class="avis-hero">
+    <h2>⭐ Témoignages de nos clients</h2>
+    <p>Plus de 200 clients satisfaits à Lomé — découvrez leurs expériences</p>
+    <div class="rating-global">
+      <div>
+        <div class="rating-big">4.9</div>
+        <div class="rating-stars">★★★★★</div>
+        <div class="rating-info">Note moyenne sur 47 avis</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" style="padding-top:40px;padding-bottom:60px">
+
+    <div class="stats-bar">
+      <div class="stat-item"><div class="value">+200</div><div class="label">Clients satisfaits</div></div>
+      <div class="stat-item"><div class="value">4.9/5</div><div class="label">Note moyenne</div></div>
+      <div class="stat-item"><div class="value">98%</div><div class="label">Recommandent</div></div>
+      <div class="stat-item"><div class="value">3+</div><div class="label">Ans d'expertise</div></div>
+    </div>
+
+    <h3 style="margin-bottom:8px">Ce que disent nos clients</h3>
+    <p class="muted" style="margin-bottom:4px">Témoignages authentiques de notre communauté MiraLocks</p>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <span class="badge-verified">✓ Vérifié</span>
+        <div class="quote-icon">❝</div>
+        <div class="stars">★★★★★</div>
+        <p class="content">Excellente expérience ! Mes locks sont magnifiques et bien entretenues. Mira est très professionnelle et attentionnée. Je viens tous les mois et je ne changerai pas de salon. Je recommande vivement à toutes les femmes de Lomé !</p>
+        <div class="author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <div class="name">Afi K.</div>
+            <div class="service">Création de locks + entretien mensuel</div>
+            <div class="date">Janvier 2025</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="badge-verified">✓ Vérifié</span>
+        <div class="quote-icon">❝</div>
+        <div class="stars">★★★★★</div>
+        <p class="content">Service impeccable, cadre agréable. Mes locks sont parfaites depuis plus d'un an grâce à MiraLocks. La fondatrice est très compétente et à l'écoute de mes besoins. Un vrai salon professionnel à Lomé !</p>
+        <div class="author">
+          <div class="author-avatar">K</div>
+          <div class="author-info">
+            <div class="name">Kofi A.</div>
+            <div class="service">Entretien régulier</div>
+            <div class="date">Décembre 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="badge-verified">✓ Vérifié</span>
+        <div class="quote-icon">❝</div>
+        <div class="stars">★★★★★</div>
+        <p class="content">J'avais peur de me lancer dans les locks mais l'équipe m'a très bien conseillée. Résultat au-delà de mes attentes ! Les produits utilisés sont naturels et mes cheveux sont en bien meilleure santé qu'avant.</p>
+        <div class="author">
+          <div class="author-avatar">E</div>
+          <div class="author-info">
+            <div class="name">Edem S.</div>
+            <div class="service">Création starter locs</div>
+            <div class="date">Novembre 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="badge-verified">✓ Vérifié</span>
+        <div class="quote-icon">❝</div>
+        <div class="stars">★★★★★</div>
+        <p class="content">Mes locks avaient besoin d'une réparation urgente suite à un mauvais entretien ailleurs. MiraLocks a tout réparé avec professionnalisme. Maintenant je ne confie mes locks qu'à eux !</p>
+        <div class="author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <div class="name">Adjo M.</div>
+            <div class="service">Réparation de locks</div>
+            <div class="date">Octobre 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="badge-verified">✓ Vérifié</span>
+        <div class="quote-icon">❝</div>
+        <div class="stars">★★★★★</div>
+        <p class="content">Je suis cliente depuis l'ouverture en 2022. La qualité est constante, les prix sont raisonnables et l'accueil est toujours chaleureux. MiraLocks fait partie de ma routine bien-être !</p>
+        <div class="author">
+          <div class="author-avatar">Y</div>
+          <div class="author-info">
+            <div class="name">Yawa D.</div>
+            <div class="service">Cliente depuis 2022</div>
+            <div class="date">Septembre 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="badge-verified">✓ Vérifié</span>
+        <div class="quote-icon">❝</div>
+        <div class="stars">★★★★★</div>
+        <p class="content">La coloration sur mes locks a été réalisée avec beaucoup de soin. Les couleurs sont éclatantes et mes locks n'ont pas été abîmées. Un vrai travail d'artiste ! Merci MiraLocks.</p>
+        <div class="author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <div class="name">Abla N.</div>
+            <div class="service">Coloration sur locks</div>
+            <div class="date">Août 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="badge-verified">✓ Vérifié</span>
+        <div class="quote-icon">❝</div>
+        <div class="stars">★★★★☆</div>
+        <p class="content">Très bon salon, je recommande ! La prise de RDV via WhatsApp est très pratique. J'aurais juste aimé un parking plus facile d'accès, mais le travail est impeccable.</p>
+        <div class="author">
+          <div class="author-avatar">K</div>
+          <div class="author-info">
+            <div class="name">Komi F.</div>
+            <div class="service">Entretien locks</div>
+            <div class="date">Juillet 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="badge-verified">✓ Vérifié</span>
+        <div class="quote-icon">❝</div>
+        <div class="stars">★★★★★</div>
+        <p class="content">Mon mari m'a offert une séance chez MiraLocks et j'ai adoré ! L'atmosphère est zen, les explications sont claires et le résultat est superbe. Je reviendrai certainement !</p>
+        <div class="author">
+          <div class="author-avatar">G</div>
+          <div class="author-info">
+            <div class="name">Gloria T.</div>
+            <div class="service">Première visite</div>
+            <div class="date">Juin 2024</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <span class="badge-verified">✓ Vérifié</span>
+        <div class="quote-icon">❝</div>
+        <div class="stars">★★★★★</div>
+        <p class="content">J'habite à Accra et je fais spécialement le déplacement à Lomé pour MiraLocks. La différence de qualité le vaut vraiment. C'est le meilleur salon de locks que j'aie visité en Afrique de l'Ouest.</p>
+        <div class="author">
+          <div class="author-avatar">E</div>
+          <div class="author-info">
+            <div class="name">Efua B.</div>
+            <div class="service">Cliente depuis Accra</div>
+            <div class="date">Mai 2024</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="share-form" style="text-align:left">
+      <h3 style="text-align:center">✍️ Partagez votre expérience</h3>
+      <p style="text-align:center">Vous avez visité MiraLocks ? Votre avis aide d'autres personnes à nous faire confiance.</p>
+
+      <div id="avis-form-container">
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-weight:600;margin-bottom:6px;color:#fff;font-size:.9rem">Votre nom *</label>
+          <input type="text" id="avis-nom" placeholder="Ex : Amina K." style="width:100%;padding:12px 14px;border-radius:8px;border:none;font-size:.95rem;box-sizing:border-box">
+        </div>
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-weight:600;margin-bottom:8px;color:#fff;font-size:.9rem">Votre note *</label>
+          <div id="star-rating" style="display:flex;gap:8px;font-size:2rem;cursor:pointer" aria-label="Note sur 5">
+            <span data-star="1" style="opacity:.4;transition:opacity .15s">⭐</span>
+            <span data-star="2" style="opacity:.4;transition:opacity .15s">⭐</span>
+            <span data-star="3" style="opacity:.4;transition:opacity .15s">⭐</span>
+            <span data-star="4" style="opacity:.4;transition:opacity .15s">⭐</span>
+            <span data-star="5" style="opacity:.4;transition:opacity .15s">⭐</span>
+          </div>
+          <input type="hidden" id="avis-note" value="0">
+        </div>
+        <div style="margin-bottom:16px">
+          <label style="display:block;font-weight:600;margin-bottom:6px;color:#fff;font-size:.9rem">Service reçu</label>
+          <select id="avis-service" style="width:100%;padding:12px 14px;border-radius:8px;border:none;font-size:.95rem;box-sizing:border-box">
+            <option value="">-- Sélectionnez --</option>
+            <option>Création de locks</option>
+            <option>Entretien / Retouches</option>
+            <option>Réparation</option>
+            <option>Coloration</option>
+            <option>Extensions</option>
+          </select>
+        </div>
+        <div style="margin-bottom:20px">
+          <label style="display:block;font-weight:600;margin-bottom:6px;color:#fff;font-size:.9rem">Votre témoignage *</label>
+          <textarea id="avis-texte" rows="4" placeholder="Décrivez votre expérience chez MiraLocks..." style="width:100%;padding:12px 14px;border-radius:8px;border:none;font-size:.95rem;resize:vertical;box-sizing:border-box"></textarea>
+        </div>
+        <button onclick="envoyerAvis()" style="width:100%;padding:14px;background:var(--gold,#c9a84c);color:#0c3320;border:none;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .25s">💬 Envoyer mon avis via WhatsApp</button>
+        <p style="margin-top:10px;font-size:.78rem;color:rgba(255,255,255,.6);text-align:center">Votre avis sera transmis via WhatsApp et peut être publié sur notre site.</p>
+      </div>
+
+      <div style="margin-top:16px;text-align:center">
+        <a class="btn-google" href="https://www.google.com/maps/search/?api=1&query=INSTITUT+MIRALOCKS+Lomé+Togo" target="_blank" style="display:inline-block">⭐ Laisser un avis Google</a>
+      </div>
+    </div>
+
+    <script>
+    var selectedStar = 0;
+    document.querySelectorAll('#star-rating span').forEach(function(s) {
+      s.addEventListener('mouseover', function() {
+        var n = parseInt(this.dataset.star);
+        document.querySelectorAll('#star-rating span').forEach(function(x, i) {
+          x.style.opacity = i < n ? '1' : '.3';
+        });
+      });
+      s.addEventListener('mouseleave', function() {
+        document.querySelectorAll('#star-rating span').forEach(function(x, i) {
+          x.style.opacity = i < selectedStar ? '1' : '.4';
+        });
+      });
+      s.addEventListener('click', function() {
+        selectedStar = parseInt(this.dataset.star);
+        document.getElementById('avis-note').value = selectedStar;
+        document.querySelectorAll('#star-rating span').forEach(function(x, i) {
+          x.style.opacity = i < selectedStar ? '1' : '.4';
+        });
+      });
+    });
+
+    function envoyerAvis() {
+      var nom     = document.getElementById('avis-nom').value.trim();
+      var note    = document.getElementById('avis-note').value;
+      var service = document.getElementById('avis-service').value;
+      var texte   = document.getElementById('avis-texte').value.trim();
+      if(!nom || note === '0' || !texte) {
+        alert('⚠️ Merci de remplir votre nom, votre note et votre témoignage.');
+        return;
+      }
+      var etoiles = '⭐'.repeat(parseInt(note));
+      var msg = '⭐ *Témoignage MiraLocks*\n\n';
+      msg += '👤 *Nom :* ' + nom + '\n';
+      msg += '🌟 *Note :* ' + etoiles + ' (' + note + '/5)\n';
+      if(service) msg += '💇 *Service :* ' + service + '\n';
+      msg += '\n💬 *Témoignage :*\n' + texte + '\n\n';
+      msg += '✨ Merci de publier mon avis sur votre site !';
+      window.open('https://wa.me/22897989001?text=' + encodeURIComponent(msg), '_blank');
+    }
+    </script>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div>
+      <h3 style="color:var(--white)">INSTITUT MiraLocks</h3>
+      <small class="muted">Coiffure – Entretien de locks • Agoè Cacaveli, près de l'école La Source, en face du terrain</small>
+      <p style="margin-top:12px">© <span id="copy-year"></span> MiraLocks. Tous droits réservés.</p>
+    </div>
+    <div>
+      <h4 style="color:var(--white)">Contact</h4>
+      <p style="margin-top:8px">
+        📞 <a href="tel:+22897989001" style="color:#b8d4c4">+228 97 98 90 01</a><br>
+        💬 <a href="https://wa.me/22897989001" target="_blank" style="color:#b8d4c4">WhatsApp</a><br>
+        📍 Agoè Cacaveli, près de l'école La Source, Lomé
+      </p>
+    </div>
+    <div>
+      <h4 style="color:var(--white)">Informations légales</h4>
+      <p style="margin-top:8px;line-height:2.2">
+        <a href="mentions-legales.html" style="color:#b8d4c4">📄 Mentions légales</a><br>
+        <a href="confidentialite.html" style="color:#b8d4c4">🔒 Confidentialité</a><br>
+        <a href="faq.html" style="color:#b8d4c4">❓ FAQ</a><br>
+        <a href="avis.html" style="color:#b8d4c4">⭐ Avis clients</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/22897989001?text=Bonjour%20MiraLocks" target="_blank" aria-label="WhatsApp">WhatsApp</a>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js" defer></script>
+<script src="js/theme-loader.js" defer></script>
+<script src="js/hamburger-menu.js" defer></script>
+<script src="js/modern-interactions.js" defer></script>
+<script src="js/analytics-tracker.js" defer></script>
+<script>document.getElementById('copy-year').textContent = new Date().getFullYear();</script>
+<script src="js/register-sw.js" defer></script>
+<script src="js/cookie-banner.js" defer></script>
+</body>
+</html>

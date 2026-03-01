@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Galerie – Institut MiraLocks | Coiffures Locks à Lomé</title>
+<meta name="description" content="Galerie photos et vidéos de l'Institut MiraLocks – Découvrez nos réalisations de coiffures locks à Lomé, Togo.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.miralocks.com/gallery.html">
+<meta property="og:title" content="Galerie – Institut MiraLocks | Coiffures Locks à Lomé">
+<meta property="og:description" content="Découvrez nos réalisations de coiffures locks en photos et vidéos – Institut MiraLocks, Lomé, Togo.">
+<meta property="og:image" content="https://www.miralocks.com/assets/logo.png">
+<meta property="og:locale" content="fr_TG">
+<meta property="og:site_name" content="Institut MiraLocks">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Galerie – Institut MiraLocks | Coiffures Locks à Lomé">
+<meta name="twitter:description" content="Découvrez nos réalisations de coiffures locks en photos et vidéos – Institut MiraLocks, Lomé, Togo.">
+<meta name="twitter:image" content="https://www.miralocks.com/assets/logo.png">
+<link rel="canonical" href="https://www.miralocks.com/gallery.html">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#c9a84c">
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="preload" href="css/styles.css" as="style">
+<link rel="preload" href="css/optimize.css" as="style">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/optimize.css">
+<script src="js/dynamic-colors.js"></script>
+</head>
+<body>
+<div style="background:var(--gold,#c9a84c);color:#0c3320;text-align:center;padding:6px 16px;font-size:.82rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+  <span>📞 <a href="tel:+22897989001" style="color:#0c3320;font-weight:700;text-decoration:none">+228 97 98 90 01</a></span>
+  <span>•</span>
+  <span>💬 <a href="https://wa.me/22897989001" target="_blank" style="color:#0c3320;font-weight:700;text-decoration:none">WhatsApp</a></span>
+  <span>•</span>
+  <span>🕐 Mar–Sam : 08h–18h</span>
+</div>
+
+<a href="#main-content" class="skip-to-content" style="position:absolute;top:-100px;left:16px;background:var(--gold,#c9a84c);color:#0c3320;padding:10px 20px;border-radius:0 0 8px 8px;font-weight:700;z-index:99999;transition:top .2s;text-decoration:none" onblur="this.style.top='-100px'" onfocus="this.style.top='0'">Aller au contenu principal</a>
+<noscript>
+  <style>.gallery-photos .gallery-item, .gallery-videos .gallery-item { opacity: 1 !important; } body { visibility: visible !important; opacity: 1 !important; }</style>
+  <div style="background:#c9a84c;color:#0c3320;text-align:center;padding:12px 20px;font-weight:700;font-size:14px">⚠️ Pour une meilleure expérience, veuillez activer JavaScript dans votre navigateur.</div>
+</noscript>
+
+<header class="header">
+  <div class="container">
+    <div class="brand">
+      <img src="assets/logo-transparent.png" alt="MiraLocks Logo" width="48" height="48" loading="eager">
+      <div><h1>MiraLocks</h1></div>
+    </div>
+    <button class="hamburger-menu" id="hamburger-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-nav"><span></span><span></span><span></span></button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="gallery.html" class="active" aria-current="page">Galerie</a>
+      <a href="blog.html">Blog</a>
+      <a href="services.html">Services</a>
+      <a href="rendezvous.html">Rendez‑vous</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <a href="avis.html">Avis</a>
+      <a href="about.html">À propos</a>
+    </nav>
+  </div>
+</header>
+<div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+<main id="main-content">
+  <div class="container gallery-page">
+    <div class="gallery-page-header">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px">
+        <h2>Galerie</h2>
+        <button onclick="if(navigator.share){navigator.share({title:'Galerie MiraLocks',url:window.location.href})}else{navigator.clipboard&&navigator.clipboard.writeText(window.location.href).then(function(){alert('✅ Lien copié !')})}" style="display:inline-flex;align-items:center;gap:6px;background:none;border:1px solid var(--gray-200,#dceee4);border-radius:8px;padding:8px 16px;font-size:.85rem;cursor:pointer;color:var(--muted,#5a7a66)">📤 Partager la galerie</button>
+      </div>
+      <p class="muted">Cliquez ou appuyez sur une photo ou une vidéo pour l'agrandir.</p>
+    </div>
+
+    <div class="gallery-filters" role="group" aria-label="Filtrer la galerie">
+      <button class="gallery-filter-btn active" data-filter="all">Tout</button>
+      <button class="gallery-filter-btn" data-filter="photos">📸 Photos</button>
+      <button class="gallery-filter-btn" data-filter="videos">🎥 Vidéos</button>
+    </div>
+
+    <section class="gallery-section" id="section-photos" aria-label="Photos de réalisations">
+      <h3 class="gallery-section-title">📸 Photos</h3>
+      <div class="gallery gallery-photos" id="gallery-photos-container">
+        <div class="gallery-item"><img src="images/locks1.jpg" alt="Coiffure locks 1 — création MiraLocks" loading="lazy" decoding="async"></div>
+        <div class="gallery-item"><img src="images/locks2.jpg" alt="Coiffure locks 2 — entretien MiraLocks" loading="lazy" decoding="async"></div>
+        <div class="gallery-item"><img src="images/locks3.jpg" alt="Coiffure locks 3 — style MiraLocks" loading="lazy" decoding="async"></div>
+        <div class="gallery-item"><img src="images/locks4.jpg" alt="Coiffure locks 4 — locks naturelles" loading="lazy" decoding="async"></div>
+        <div class="gallery-item"><img src="images/locks5.jpg" alt="Coiffure locks 5 — starter locs" loading="lazy" decoding="async"></div>
+        <div class="gallery-item"><img src="images/locks6.png" alt="Coiffure locks 6 — réparation locks" loading="lazy" decoding="async"></div>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="section-videos" aria-label="Vidéos de réalisations">
+      <h3 class="gallery-section-title">🎥 Vidéos</h3>
+      <div class="gallery gallery-videos" id="gallery-videos-container">
+        <div class="gallery-item video">
+          <video preload="metadata" playsinline muted controlslist="nodownload" aria-label="Vidéo réalisation locks 1">
+            <source src="video/locks5.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture vidéo.
+          </video>
+        </div>
+        <div class="gallery-item video">
+          <video preload="metadata" playsinline muted controlslist="nodownload" aria-label="Vidéo réalisation locks 2">
+            <source src="video/locks6.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la lecture vidéo.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <div id="gallery-empty-state" class="gallery-empty" style="display:none" aria-live="polite">
+      <span class="gallery-empty-icon">🖼️</span>
+      <p>Aucune réalisation disponible pour le moment.</p>
+      <p class="muted">Revenez bientôt, de nouvelles créations arrivent !</p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-brand">
+      <h3>INSTITUT MiraLocks</h3>
+      <small class="muted">Coiffure – Entretien de locks • Agoè Cacaveli, près de l'école La Source</small>
+      <p style="margin-top:12px">© <span id="copy-year">2025</span> MiraLocks. Tous droits réservés.<script>document.getElementById("copy-year").textContent=new Date().getFullYear();</script></p>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <address style="font-style:normal;margin-top:8px;line-height:1.9">
+        <a href="tel:+22897989001">📞 +228 97 98 90 01</a><br>
+        <a href="https://wa.me/22897989001" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a><br>
+        <span>📍 Agoè Cacaveli, près de l'école La Source, en face du terrain</span>
+      </address>
+    </div>
+    <div>
+      <h4 style="color:var(--white)">Informations légales</h4>
+      <p style="margin-top:8px;line-height:2.2">
+        <a href="mentions-legales.html" style="color:#b8d4c4">📄 Mentions légales</a><br>
+        <a href="confidentialite.html" style="color:#b8d4c4">🔒 Confidentialité</a><br>
+        <a href="faq.html" style="color:#b8d4c4">❓ FAQ</a><br>
+        <a href="avis.html" style="color:#b8d4c4">⭐ Avis clients</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/22897989001?text=Bonjour%20MiraLocks%20%F0%9F%91%8B%20J%27ai%20vu%20votre%20galerie%20!" target="_blank" rel="noopener noreferrer" aria-label="Nous contacter sur WhatsApp">💬 WhatsApp</a>
+<a class="admin-float" href="admin.html" title="Administration" id="admin-secret-btn" style="display:none!important;opacity:0;pointer-events:none" aria-hidden="true">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+</a>
+<script>
+(function(){
+  document.addEventListener('keydown', function(e){
+    if(e.ctrlKey && e.shiftKey && e.key === 'A'){
+      var btn = document.getElementById('admin-secret-btn');
+      if(btn){ btn.style.cssText='display:flex!important;opacity:1;pointer-events:auto'; btn.removeAttribute('aria-hidden'); }
+    }
+  });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js" defer></script>
+<script src="js/theme-loader.js" defer></script>
+<script src="js/content-loader-supabase.js" defer></script>
+<script src="js/hamburger-menu.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/modern-interactions.js" defer></script>
+<script src="js/lightbox-swipe.js" defer></script>
+<script src="js/analytics-tracker.js" defer></script>
+<script>
+(function () {
+  'use strict';
+  function watchGalleryForLightbox() {
+    var targets = [document.getElementById('gallery-photos-container'), document.getElementById('gallery-videos-container')].filter(Boolean);
+    if (!targets.length || !window.MiraLocksLightbox) return;
+    var observer = new MutationObserver(function (mutations) {
+      var added = mutations.some(function (m) { return m.addedNodes.length > 0; });
+      if (added) setTimeout(function () { window.MiraLocksLightbox.reload(); }, 150);
+    });
+    targets.forEach(function (el) { observer.observe(el, { childList: true, subtree: false }); });
+  }
+  function initGalleryFilters() {
+    var filterBtns = document.querySelectorAll('.gallery-filter-btn');
+    var sectionPhotos = document.getElementById('section-photos');
+    var sectionVideos = document.getElementById('section-videos');
+    if (!filterBtns.length) return;
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filterBtns.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-pressed', 'false'); });
+        btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true');
+        var filter = btn.dataset.filter;
+        if (filter === 'all') { show(sectionPhotos); show(sectionVideos); }
+        else if (filter === 'photos') { show(sectionPhotos); hide(sectionVideos); }
+        else if (filter === 'videos') { hide(sectionPhotos); show(sectionVideos); }
+      });
+    });
+    function show(el) { if (el) el.style.display = ''; }
+    function hide(el) { if (el) el.style.display = 'none'; }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { initGalleryFilters(); setTimeout(watchGalleryForLightbox, 600); });
+  } else { initGalleryFilters(); setTimeout(watchGalleryForLightbox, 600); }
+})();
+</script>
+<style>
+  .gallery-page { padding-top: 40px; padding-bottom: 60px; }
+  .gallery-page-header { margin-bottom: 24px; }
+  .gallery-page-header h2 { margin-bottom: 6px; }
+  .gallery-filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .gallery-filters .gallery-filter-btn[aria-pressed="true"], .gallery-filters .gallery-filter-btn.active { background: var(--gold, #d4af37); color: #000; border-color: var(--gold, #d4af37); }
+  .gallery-section { margin-bottom: 52px; }
+  .gallery-empty { text-align: center; padding: 60px 20px; color: var(--muted, #666); }
+  .gallery-empty-icon { font-size: 56px; display: block; margin-bottom: 16px; }
+  .gallery-empty p { margin-bottom: 8px; }
+  .footer-contact a { color: var(--gold-light, #e8c95f); }
+  .footer-contact a:hover { color: var(--gold, #d4af37); text-decoration: underline; }
+  @media (max-width: 480px) { .gallery-filters { gap: 8px; } .gallery-filter-btn { padding: 8px 14px; font-size: .85rem; } }
+</style>
+<script src="js/register-sw.js" defer></script>
+<script src="js/cookie-banner.js" defer></script>
+</body>
+</html>

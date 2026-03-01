@@ -1,0 +1,1131 @@
+/*
+ * styles.css — MiraLocks — Version unifiée & améliorée
+ * ─────────────────────────────────────────────────────
+ * CORRECTIONS MAJEURES :
+ *  - Suppression des duplications (nav, hamburger, galerie définis une seule fois)
+ *  - Unification des variables CSS (--gold au lieu de --gold-primary partout)
+ *  - Suppression des !important abusifs remplacés par une cascade propre
+ *  - touch-action: manipulation retiré du * global (cassait le swipe lightbox)
+ *  - nav a::after avec '→' limité au mobile uniquement
+ *  - section.container : padding unifié sans conflit
+ *  - Cohérence typographique clamp() sur toute la charte
+ * ─────────────────────────────────────────────────────
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   1. VARIABLES CSS — SOURCE UNIQUE DE VÉRITÉ
+═══════════════════════════════════════════════════════════ */
+:root {
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     THÈME : Vert Émeraude + Doré — Luxe naturel
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* Palette dorée (accent principal) */
+  --gold:          #c9a84c;
+  --gold-light:    #e2c47a;
+  --gold-dark:     #a8882d;
+  --gold-gradient: linear-gradient(135deg, #c9a84c 0%, #e8d080 50%, #c9a84c 100%);
+
+  /* Palette émeraude (couleur principale du site) */
+  --emerald:          #1b6b45;
+  --emerald-light:    #228b57;
+  --emerald-dark:     #124a30;
+  --emerald-deep:     #0c3320;
+  --emerald-soft:     #e8f5ee;
+  --emerald-gradient: linear-gradient(135deg, #1b6b45 0%, #228b57 100%);
+
+  /* Alias pour la compatibilité avec le code existant */
+  /* --gold reste doré, --black devient vert profond */
+  --black:        #0c3320;
+  --black-light:  #124a30;
+  --black-lighter:#1b6b45;
+  --white:        #ffffff;
+  --white-off:    #f5fbf7;
+  --white-cream:  #edf7f1;
+
+  /* Texte */
+  --text:   #0c2818;
+  --muted:  #5a7a66;
+  --accent: #c9a84c;
+
+  /* Gris verdâtres (neutres harmonisés) */
+  --gray-100: #f0f7f3;
+  --gray-200: #dceee4;
+  --gray-300: #b8d4c4;
+  --gray-400: #8aad99;
+  --gray-500: #5a7a66;
+  --gray-600: #3d5c4a;
+  --gray-700: #253d30;
+
+  /* Ombres émeraude & dorées */
+  --shadow-sm:         0 2px 8px rgba(12,50,32,.06);
+  --shadow-md:         0 4px 16px rgba(12,50,32,.10);
+  --shadow-lg:         0 8px 24px rgba(12,50,32,.14);
+  --shadow-xl:         0 16px 48px rgba(12,50,32,.18);
+  --shadow-gold:       0 8px 32px rgba(201,168,76,.32);
+  --shadow-gold-hover: 0 12px 40px rgba(201,168,76,.48);
+  --shadow-emerald:    0 8px 32px rgba(27,107,69,.30);
+
+  /* Rayons */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --t-fast:   150ms cubic-bezier(.4,0,.2,1);
+  --t-base:   300ms cubic-bezier(.4,0,.2,1);
+  --t-slow:   500ms cubic-bezier(.4,0,.2,1);
+  --t-bounce: 600ms cubic-bezier(.68,-.55,.265,1.55);
+
+  /* Espacements */
+  --sp-xs:  .5rem;
+  --sp-sm:  .75rem;
+  --sp-md:  1rem;
+  --sp-lg:  1.5rem;
+  --sp-xl:  2rem;
+  --sp-2xl: 3rem;
+  --sp-3xl: 4rem;
+
+  /* Typographie fluide */
+  --fs-h1:    clamp(1.6rem, 4.5vw, 3rem);
+  --fs-h2:    clamp(1.35rem, 3.5vw, 2.25rem);
+  --fs-h3:    clamp(1.15rem, 2.5vw, 1.65rem);
+  --fs-body:  clamp(.95rem, 1.6vw, 1.05rem);
+  --fs-small: clamp(.8rem, 1.2vw, .9rem);
+
+  /* Thème admin (compatibilité Supabase site_settings) */
+  --header-bg: #0c3320;
+  --footer-bg: #0c3320;
+
+  /* Galerie */
+  --media-height: 340px;
+  --max-width: 1200px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2. RESET UNIVERSEL
+═══════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+  background: var(--white-off);
+  color: var(--text);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* Sélection de texte */
+::selection {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* Supprimer le flash bleu iOS sur les éléments interactifs uniquement */
+a, button, input, select, textarea, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   3. TYPOGRAPHIE
+═══════════════════════════════════════════════════════════ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  color: var(--text);
+}
+
+h1 { font-size: var(--fs-h1); font-weight: 800; }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+
+p {
+  font-size: var(--fs-body);
+  line-height: 1.75;
+  color: var(--gray-700);
+}
+
+small, .muted {
+  font-size: var(--fs-small);
+  color: var(--muted);
+}
+
+a {
+  color: var(--gold);
+  transition: color var(--t-fast);
+  text-decoration: none;
+}
+
+a:hover { color: var(--gold-dark); }
+
+/* ═══════════════════════════════════════════════════════════
+   4. LAYOUT — CONTAINER
+═══════════════════════════════════════════════════════════ */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 40px);
+  background: transparent;
+  color: var(--text);
+}
+
+section {
+  background: var(--white);
+  color: var(--text);
+}
+
+section.container {
+  padding-top: 56px;
+  padding-bottom: 40px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5. HEADER
+═══════════════════════════════════════════════════════════ */
+.header {
+  background: rgba(12,51,32,.97);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(201,168,76,.30);
+  box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 8px 32px rgba(12,51,32,.40);
+  transition: padding var(--t-base), box-shadow var(--t-base);
+}
+
+.header.scrolled {
+  box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 12px 40px rgba(12,51,32,.55);
+}
+
+.header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 64px;
+  padding-block: 10px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   6. BRAND / LOGO
+═══════════════════════════════════════════════════════════ */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.brand img {
+  width: clamp(38px, 6vw, 54px);
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--white) 0%, var(--white-cream) 100%);
+  padding: 6px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t-base), box-shadow var(--t-base);
+}
+
+.brand img:hover {
+  transform: scale(1.06) rotate(-2deg);
+  box-shadow: var(--shadow-gold);
+}
+
+.brand h1 {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(1.15rem, 3vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: .05em;
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.brand small {
+  font-size: clamp(.65rem, 1.3vw, .8rem);
+  color: var(--gold-light);
+  display: block;
+  margin-top: 2px;
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   7. NAVIGATION — DESKTOP
+═══════════════════════════════════════════════════════════ */
+#main-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 1.5vw, 16px);
+  flex-wrap: nowrap;
+}
+
+#main-nav a {
+  color: var(--white);
+  font-weight: 600;
+  font-size: clamp(.78rem, 1.2vw, .92rem);
+  padding: 7px 11px;
+  border-radius: var(--radius-md);
+  position: relative;
+  white-space: nowrap;
+  transition: color var(--t-base), background var(--t-base);
+  overflow: hidden;
+}
+
+/* Barre dorée animée sous le lien */
+#main-nav a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--gold-gradient);
+  transform: translateX(-50%);
+  transition: width var(--t-base);
+  border-radius: var(--radius-full);
+}
+
+#main-nav a:hover {
+  color: var(--gold);
+  background: rgba(212,175,55,.1);
+}
+
+#main-nav a:hover::before { width: 80%; }
+
+#main-nav a.active {
+  background: var(--gold-gradient);
+  color: var(--black);
+  font-weight: 700;
+  box-shadow: var(--shadow-gold);
+}
+
+#main-nav a.active::before { display: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   8. HAMBURGER — bouton
+═══════════════════════════════════════════════════════════ */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  z-index: 1001;
+  flex-shrink: 0;
+  transition: background var(--t-fast);
+}
+
+.hamburger-menu:hover { background: rgba(212,175,55,.1); }
+
+.hamburger-menu span {
+  display: block;
+  height: 2.5px;
+  background: var(--white);
+  border-radius: var(--radius-full);
+  transition: transform var(--t-base), opacity var(--t-base), background var(--t-base);
+  transform-origin: center;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: translateY(7.5px) rotate(45deg);
+  background: var(--gold);
+}
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger-menu.active span:nth-child(3) {
+  transform: translateY(-7.5px) rotate(-45deg);
+  background: var(--gold);
+}
+
+/* Overlay fond semi-transparent */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.62);
+  z-index: 999;
+  backdrop-filter: blur(3px);
+}
+.nav-overlay.active { display: block; }
+
+/* ═══════════════════════════════════════════════════════════
+   9. HERO
+═══════════════════════════════════════════════════════════ */
+.hero {
+  background:
+    radial-gradient(circle at 20% 50%, rgba(27,107,69,.12) 0%, transparent 55%),
+    radial-gradient(circle at 80% 50%, rgba(201,168,76,.10) 0%, transparent 55%),
+    linear-gradient(135deg, var(--emerald-soft) 0%, var(--white) 100%);
+  padding: var(--sp-3xl) 0;
+  margin: var(--sp-lg) 0;
+  border-radius: var(--radius-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 5vw, 60px);
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-inner .intro { flex: 1 1 280px; }
+.hero-inner > div:last-child { flex: 0 1 400px; width: 100%; }
+
+.hero h2 {
+  font-family: 'Georgia', serif;
+  margin-bottom: var(--sp-lg);
+  color: var(--black);
+  line-height: 1.1;
+}
+
+.hero p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin: var(--sp-md) 0 var(--sp-lg);
+  color: var(--gray-600);
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   10. BOUTONS CTA / PRIMARY
+═══════════════════════════════════════════════════════════ */
+.cta,
+a.cta,
+button.primary,
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-sm);
+  background: var(--gold-gradient);
+  color: var(--black);
+  padding: 14px clamp(18px, 4vw, 28px);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: clamp(.9rem, 2vw, 1.05rem);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--shadow-gold);
+  transition: transform var(--t-base), box-shadow var(--t-base), opacity var(--t-fast);
+  position: relative;
+  overflow: hidden;
+  min-height: 48px;
+  min-width: 48px;
+  font-family: inherit;
+}
+
+/* Effet shimmer au survol */
+.cta::before, a.cta::before, button.primary::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -110%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.32), transparent);
+  transition: left .5s ease;
+}
+
+.cta:hover::before, a.cta:hover::before, button.primary:hover::before { left: 110%; }
+
+.cta:hover, a.cta:hover, button.primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-gold-hover);
+  color: var(--black);
+}
+
+.cta:active, a.cta:active, button.primary:active {
+  transform: scale(.97);
+  opacity: .9;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   11. CARDS
+═══════════════════════════════════════════════════════════ */
+.card {
+  background: var(--white);
+  padding: var(--sp-xl);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--gray-200);
+  transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
+  position: relative;
+  overflow: hidden;
+  color: var(--text);
+}
+
+/* Barre dorée top au hover */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 4px;
+  background: var(--gold-gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-base);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--gold);
+}
+
+.card:hover::before { transform: scaleX(1); }
+
+.card h3 {
+  margin-bottom: var(--sp-md);
+  color: var(--black);
+}
+
+.card p { color: var(--gray-600); }
+
+.contact-card {
+  background: linear-gradient(135deg, var(--white) 0%, var(--white-cream) 100%);
+  border: 2px solid var(--gold);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   12. SERVICES GRID
+═══════════════════════════════════════════════════════════ */
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px,100%), 1fr));
+  gap: clamp(14px, 3vw, 24px);
+  padding: var(--sp-xl) 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   13. GALERIE
+═══════════════════════════════════════════════════════════ */
+.gallery-section { margin-bottom: 40px; }
+
+.gallery-section-title {
+  font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+  color: var(--black);
+  margin: var(--sp-xl) 0 var(--sp-lg);
+  font-family: 'Georgia', serif;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-md);
+  padding-bottom: var(--sp-sm);
+}
+
+/* Ligne décorative */
+.gallery-section-title::before {
+  content: '';
+  width: 48px;
+  height: 4px;
+  background: var(--gold-gradient);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.gallery-section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gray-300) 0%, transparent 100%);
+}
+
+/* Grille principale — desktop 4 colonnes par défaut */
+.gallery,
+.gallery-photos,
+.gallery-videos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  padding: 0;
+  margin: 16px 0;
+  background: transparent;
+}
+
+.gallery-container {
+  background: var(--white);
+  padding: 40px 0;
+}
+
+/* Item */
+.gallery-item {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--t-base), box-shadow var(--t-base);
+  background: var(--gray-100);
+  aspect-ratio: 3 / 4;
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.gallery-item img,
+.gallery-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: var(--radius-lg);
+}
+
+.gallery-item img { cursor: pointer; }
+
+/* Overlay play sur les vidéos */
+.gallery-item.video {
+  cursor: pointer;
+}
+.gallery-item.video::after {
+  content: '▶';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: rgba(255,255,255,.92);
+  background: rgba(0,0,0,.28);
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--t-base);
+}
+.gallery-item.video:hover::after { opacity: 1; }
+
+/* Breakpoints galerie */
+@media (max-width: 379px) {
+  .gallery, .gallery-photos, .gallery-videos {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+@media (min-width: 380px) and (max-width: 599px) {
+  .gallery, .gallery-photos, .gallery-videos {
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+  }
+}
+@media (min-width: 600px) and (max-width: 767px) {
+  .gallery, .gallery-photos, .gallery-videos {
+    grid-template-columns: repeat(2,1fr);
+    gap: 14px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gallery, .gallery-photos, .gallery-videos {
+    grid-template-columns: repeat(3,1fr);
+    gap: 16px;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .gallery, .gallery-photos, .gallery-videos {
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+  }
+}
+@media (min-width: 1440px) {
+  .gallery, .gallery-photos, .gallery-videos {
+    grid-template-columns: repeat(5,1fr);
+    gap: 24px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   14. FORMULAIRES
+═══════════════════════════════════════════════════════════ */
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px,100%), 1fr));
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.form-row .col { flex: 1; }
+
+input, textarea, select {
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 15px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--gray-200);
+  font-size: 16px; /* évite le zoom iOS */
+  font-family: inherit;
+  background: var(--white);
+  color: var(--text);
+  transition: border-color var(--t-base), box-shadow var(--t-base), transform var(--t-base);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(212,175,55,.12);
+  transform: translateY(-1px);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+/* Flèche personnalisée pour select */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 13px center;
+  padding-right: 40px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   15. FOOTER
+═══════════════════════════════════════════════════════════ */
+.footer {
+  background: linear-gradient(135deg, var(--emerald-deep) 0%, var(--black-light) 100%);
+  color: var(--gray-300);
+  padding: var(--sp-3xl) 0 var(--sp-xl);
+  margin-top: var(--sp-3xl);
+  border-top: 2px solid var(--gold);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--gold) 50%, transparent 100%);
+}
+
+.footer .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px,100%), 1fr));
+  gap: clamp(20px, 4vw, 40px);
+  padding-block: clamp(24px, 4vw, 40px);
+}
+
+.footer h3, .footer h4 {
+  color: var(--white);
+  margin-bottom: var(--sp-md);
+}
+
+.footer p, .footer small { line-height: 1.8; color: var(--gray-300); }
+.footer a { color: var(--gold-light); }
+.footer a:hover { color: var(--gold); text-decoration: underline; }
+
+/* ═══════════════════════════════════════════════════════════
+   16. BOUTONS FLOTTANTS WhatsApp & Admin
+═══════════════════════════════════════════════════════════ */
+.whatsapp-float,
+.admin-float {
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--t-base), box-shadow var(--t-base);
+}
+
+.whatsapp-float {
+  right: var(--sp-xl);
+  bottom: var(--sp-xl);
+  background: var(--gold-gradient);
+  color: var(--black);
+  padding: 13px 22px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: var(--shadow-gold);
+  border: 2px solid transparent;
+  gap: 8px;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: var(--shadow-gold-hover);
+  color: var(--black);
+}
+
+.admin-float {
+  right: var(--sp-xl);
+  bottom: calc(var(--sp-xl) + 68px);
+  background: rgba(10,10,10,.82);
+  backdrop-filter: blur(10px);
+  color: var(--gold);
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--gold);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+.admin-float:hover {
+  background: var(--gold-gradient);
+  color: var(--black);
+  transform: scale(1.1) rotate(90deg);
+  box-shadow: var(--shadow-gold);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   17. ANIMATIONS
+═══════════════════════════════════════════════════════════ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -1000px 0; }
+  100% { background-position:  1000px 0; }
+}
+
+.fade-in          { animation: fadeInUp .7s var(--t-base) forwards; }
+.fade-in-delay-1  { animation: fadeInUp .7s .1s forwards; opacity: 0; }
+.fade-in-delay-2  { animation: fadeInUp .7s .2s forwards; opacity: 0; }
+
+/* ═══════════════════════════════════════════════════════════
+   18. UTILITAIRES
+═══════════════════════════════════════════════════════════ */
+.text-center { text-align: center; }
+
+.gallery-filter-btn {
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--t-base);
+  color: var(--text);
+}
+
+.gallery-filter-btn:hover,
+.gallery-filter-btn.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   19. SCROLLBAR PERSONNALISÉE (desktop)
+═══════════════════════════════════════════════════════════ */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar       { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold-dark); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   20. RESPONSIVE — TABLETTE (768px – 1023px)
+═══════════════════════════════════════════════════════════ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root {
+    --sp-xl:  1.5rem;
+    --sp-2xl: 2.25rem;
+    --sp-3xl: 3rem;
+  }
+  .services { grid-template-columns: repeat(2,1fr); }
+}
+
+/* Tablette : garder le nav en ligne, masquer hamburger */
+@media (min-width: 768px) {
+  .hamburger-menu { display: none; }
+  .nav-overlay    { display: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   21. RESPONSIVE — MOBILE (≤ 767px)
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  :root {
+    --sp-md:  .75rem;
+    --sp-lg:  1rem;
+    --sp-xl:  1.25rem;
+    --sp-2xl: 1.75rem;
+    --sp-3xl: 2.25rem;
+    --sp-xs:  .4rem;
+  }
+
+  /* Container */
+  .container { padding-inline: 16px; }
+  section.container { padding-top: 44px; padding-bottom: 28px; }
+
+  /* Header */
+  .header { padding-block: 8px; }
+  .brand img   { width: 46px; }
+  .brand small { display: none; }
+
+  /* Hamburger visible */
+  .hamburger-menu { display: flex; }
+
+  /* Menu mobile — glisse depuis la droite */
+  #main-nav {
+    position: fixed;
+    top: 0; right: -100%;
+    width: min(280px, 80vw);
+    height: 100dvh;
+    background: linear-gradient(160deg, var(--emerald-deep) 0%, var(--emerald-dark) 100%);
+    flex-direction: column;
+    gap: 0;
+    padding: 80px 20px 32px;
+    z-index: 1000;
+    transition: right .32s cubic-bezier(.4,0,.2,1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: -4px 0 24px rgba(12,51,32,.6);
+  }
+
+  #main-nav.active { right: 0; }
+
+  #main-nav a {
+    font-size: 1.05rem;
+    padding: 14px 12px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    color: var(--white);
+  }
+
+  /* Flèche → uniquement sur mobile dans le menu */
+  #main-nav a::after {
+    content: '→';
+    font-size: 18px;
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: opacity var(--t-base), transform var(--t-base);
+  }
+
+  #main-nav a:hover::after,
+  #main-nav a:active::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  #main-nav a:active {
+    background: rgba(212,175,55,.18);
+  }
+
+  #main-nav a.active {
+    background: var(--gold-gradient);
+    color: var(--black);
+  }
+
+  #main-nav a.active::after { display: none; }
+  #main-nav a:last-child { border-bottom: none; }
+
+  /* Hero */
+  .hero { padding: var(--sp-xl) 0; margin: 12px 0; border-radius: var(--radius-lg); }
+  .hero-inner { flex-direction: column; text-align: center; }
+  .hero-inner > div:last-child { width: 100%; max-width: 100%; }
+  .hero p { font-size: 1rem; }
+  .cta, a.cta { width: 100%; }
+
+  /* Services */
+  .services { grid-template-columns: 1fr; gap: 14px; }
+
+  /* Cards */
+  .card { padding: 18px; margin-bottom: 14px; }
+  .card:hover { transform: none; box-shadow: var(--shadow-md); }
+
+  /* Formulaires */
+  .form-row { grid-template-columns: 1fr; }
+
+  /* Footer */
+  .footer .container { text-align: center; }
+
+  /* Boutons flottants */
+  .whatsapp-float {
+    right: 14px; bottom: 14px;
+    padding: 12px 18px;
+    font-size: .92rem;
+  }
+  .admin-float {
+    right: 14px;
+    bottom: calc(14px + 62px);
+    width: 46px; height: 46px;
+  }
+
+  /* Désactiver curseur custom, scroll progress */
+  #custom-cursor { display: none; }
+  #scroll-progress { height: 2px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   22. TRÈS PETITS ÉCRANS (< 380px)
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 379px) {
+  .container { padding-inline: 12px; }
+  .brand h1  { font-size: 1rem; }
+  .brand img { width: 40px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   23. PAYSAGE MOBILE
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) and (orientation: landscape) {
+  .hero { padding: 20px 0; }
+  section.container { padding-top: 40px; }
+  #main-nav { padding-top: 56px; width: min(320px, 70vw); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   24. GRAND ÉCRAN ≥ 1920px
+═══════════════════════════════════════════════════════════ */
+@media (min-width: 1920px) {
+  .container { max-width: 1600px; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   25. TOUCH : ZONES MINIMALES (WCAG 2.5.8)
+═══════════════════════════════════════════════════════════ */
+@media (hover: none) and (pointer: coarse) {
+  a, button, input, select, textarea, [role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  a:active, button:active { opacity: .75; }
+  .card:hover, .gallery-item:hover { transform: none; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   26. PERFORMANCES — WILL-CHANGE CIBLÉ
+═══════════════════════════════════════════════════════════ */
+.header, .whatsapp-float, .admin-float, .lightbox-swipe {
+  will-change: transform;
+}
+.gallery-item, .card, #main-nav a, .cta, button {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+img, video { will-change: auto; }
+
+/* Éviter tout dépassement horizontal */
+body { overflow-x: hidden; }
+.container, .hero-inner, .services,
+.gallery, .gallery-photos, .gallery-videos, .form-row {
+  max-width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   27. ACCESSIBILITÉ — MOUVEMENTS RÉDUITS
+═══════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   28. MODE SOMBRE SYSTÈME
+═══════════════════════════════════════════════════════════ */
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: var(--black-light);
+    border-color: var(--black-lighter);
+    color: var(--white-off);
+  }
+  .card h3, .card p { color: var(--white-off); }
+  body   { background: var(--black); }
+  section { background: var(--black); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   29. IMPRESSION
+═══════════════════════════════════════════════════════════ */
+@media print {
+  .header, .footer, .whatsapp-float, .admin-float,
+  .hamburger-menu, .nav-overlay, #scroll-progress,
+  .lightbox-swipe { display: none !important; }
+  body  { color: #000; background: #fff; }
+  a     { color: #000; text-decoration: underline; }
+  .container { max-width: 100%; padding: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   30. CURSEUR CUSTOM DÉSACTIVÉ (géré par modern-interactions.js)
+═══════════════════════════════════════════════════════════ */
+.custom-cursor { display: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   31. LIGHTBOX — styles de base (le reste dans lightbox-swipe.js)
+═══════════════════════════════════════════════════════════ */
+.lightbox-swipe {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.95);
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity var(--t-base);
+  will-change: opacity;
+}
+.lightbox-swipe.active { display: flex; opacity: 1; }
+
+.lightbox-close:focus,
+.lightbox-nav:focus {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Prévenir la sélection dans le lightbox */
+.lightbox-swipe * {
+  user-select: none;
+  -webkit-user-select: none;
+}

@@ -1,0 +1,2045 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - MiraLocks</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/admin-responsive.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c3320 0%, #1b6b45 50%, #c9a84c 100%);
+            min-height: 100vh;
+        }
+
+        /* LOGIN SCREEN */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            max-width: 450px;
+            width: 100%;
+            background: white;
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .login-header h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #1b6b45;
+            box-shadow: 0 0 0 4px rgba(27, 107, 69, 0.12);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, #1b6b45 0%, #c9a84c 100%);
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(27, 107, 69, 0.4);
+        }
+
+        .btn-login:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.error {
+            background: #fee;
+            color: #c33;
+            border-left: 4px solid #c33;
+        }
+
+        .message.success {
+            background: #efe;
+            color: #3c3;
+            border-left: 4px solid #3c3;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .login-footer a {
+            color: #1b6b45;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .login-footer a:hover {
+            color: #0c3320;
+            text-decoration: underline;
+        }
+
+        /* ADMIN PANEL */
+        .admin-container {
+            display: none;
+            min-height: 100vh;
+            background: #f0f7f3;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, #0c3320 0%, #1b6b45 100%);
+            color: white;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(12, 51, 32, 0.3);
+            border-bottom: 3px solid #c9a84c;
+        }
+
+        .admin-header .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .admin-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .admin-header p {
+            opacity: 0.8;
+            font-size: 15px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-home {
+            background: linear-gradient(135deg, #c9a84c 0%, #e8d080 100%);
+            color: #0c3320;
+            font-weight: 700;
+        }
+
+        .btn-home:hover {
+            background: linear-gradient(135deg, #a8882d 0%, #c9a84c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-logout {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-logout:hover {
+            background: #c82333;
+        }
+
+        .admin-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: none;
+            background: transparent;
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            background: #e8f5ee;
+            color: #1b6b45;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #1b6b45 0%, #c9a84c 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(27, 107, 69, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            font-size: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+            .login-box { padding: 30px 20px; }
+            .admin-header { padding: 20px; }
+        }
+
+        .upload-zone {
+            border: 3px dashed #ddd;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fafbfc;
+        }
+
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: #1b6b45;
+            background: #e8f5ee;
+        }
+
+        .upload-zone .icon {
+            font-size: 64px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .upload-zone p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .upload-zone small {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1b6b45 0%, #c9a84c 100%);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 15px;
+            margin-top: 15px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(27, 107, 69, 0.35);
+        }
+
+        .progress-bar {
+            display: none;
+            width: 100%;
+            height: 40px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1b6b45 0%, #c9a84c 100%);
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .item-card img, .item-card video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .item-content {
+            padding: 20px;
+        }
+
+        .item-content h4 {
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            font-size: 16px;
+        }
+
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .item-section {
+            background: #e8f5ee;
+            color: #1b6b45;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .btn-delete {
+            width: 100%;
+            background: #dc3545;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .status-message {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 14px;
+            display: none;
+        }
+
+        .status-message.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+        }
+
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #dc3545;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        /* THEME COLORS */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .color-item {
+            background: #f0f7f3;
+            padding: 20px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .color-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .color-item label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .color-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .color-input-wrapper input[type="color"] {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .color-input-wrapper input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 40px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid #e9ecef;
+        }
+
+        .theme-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #1b6b45 0%, #228b57 100%);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-save:hover {
+            background: linear-gradient(135deg, #0c3320 0%, #1b6b45 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(27, 107, 69, 0.35);
+        }
+
+        .btn-reset {
+            background: #5a7a66;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-reset:hover {
+            background: #3d5c4a;
+        }
+
+        /* ===== THEME PRESETS ===== */
+        .theme-presets {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin: 20px 0 30px;
+        }
+        
+        .theme-preset {
+            padding: 25px 15px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .theme-preset:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .theme-preset.active {
+            border-color: #fff;
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.3);
+        }
+        
+        .theme-preset-name {
+            font-weight: 700;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .theme-preset-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        
+        .color-picker-group {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .color-picker-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f0f7f3;
+            border-radius: 8px;
+        }
+        
+        .color-picker-row label {
+            font-weight: 600;
+            min-width: 150px;
+            font-size: 14px;
+        }
+        
+        .color-picker-row input[type="color"] {
+            width: 60px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .color-picker-row input[type="text"] {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+        }
+        
+        .theme-preview {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin: 20px 0;
+        }
+        
+        .preview-header {
+            background: var(--black, #000);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .preview-button {
+            background: var(--gold, #d4af37);
+            color: var(--black, #000);
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        
+        .preview-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+            margin: 10px 0;
+        }
+        
+        .theme-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .theme-actions button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .theme-actions .btn-save {
+            background: linear-gradient(135deg, #1b6b45 0%, #228b57 100%);
+            color: white;
+        }
+
+        .theme-actions .btn-save:hover {
+            background: linear-gradient(135deg, #0c3320 0%, #1b6b45 100%);
+        }
+
+        .theme-actions .btn-reset {
+            background: #5a7a66;
+            color: white;
+        }
+
+        .theme-actions .btn-reset:hover {
+            background: #3d5c4a;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ÉCRAN DE CONNEXION -->
+    <div id="loginScreen" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>🔐 Administration</h1>
+                <p>MiraLocks - Connexion sécurisée</p>
+            </div>
+
+            <div id="loginMessage"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">📧 Email</label>
+                    <input 
+                        type="email" 
+                        id="loginEmail" 
+                        placeholder="admin@miralocks.com" 
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">🔒 Mot de passe</label>
+                    <input 
+                        type="password" 
+                        id="loginPassword" 
+                        placeholder="Votre mot de passe" 
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">
+                    Se connecter
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <a href="index.html">← Retour au site</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERFACE ADMIN -->
+    <div id="adminPanel" class="admin-container">
+        <div class="admin-header">
+            <div class="container">
+                <h1>⚙️ Administration MiraLocks</h1>
+                <p>Gestion du contenu avec authentification Supabase</p>
+                
+                <div class="header-actions">
+                    <a href="index.html" class="btn btn-home" target="_blank">
+                        🏠 Voir le site
+                    </a>
+                    <button class="btn btn-logout" onclick="logout()">
+                        🚪 Déconnexion
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('dashboard', this)">📊 Dashboard</button>
+                <button class="tab-btn" onclick="switchTab('photos', this)">📸 Photos</button>
+                <button class="tab-btn" onclick="switchTab('videos', this)">🎥 Vidéos</button>
+                <button class="tab-btn" onclick="switchTab('blog', this)">📝 Blog</button>
+                <button class="tab-btn" onclick="switchTab('theme', this)">🎨 Thème</button>
+            </div>
+
+            <!-- ONGLET DASHBOARD -->
+            <div id="tab-dashboard" class="tab-content active">
+                <div id="dashboard-section-content">
+                    <!-- Stats Cards -->
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:30px">
+                        <div class="card" style="text-align:center;padding:25px">
+                            <div style="font-size:40px;margin-bottom:10px">📸</div>
+                            <div id="dash-photos-count" style="font-size:36px;font-weight:700;color:#1b6b45">—</div>
+                            <div style="color:#666;margin-top:5px;font-size:14px">Photos publiées</div>
+                        </div>
+                        <div class="card" style="text-align:center;padding:25px">
+                            <div style="font-size:40px;margin-bottom:10px">🎥</div>
+                            <div id="dash-videos-count" style="font-size:36px;font-weight:700;color:#1b6b45">—</div>
+                            <div style="color:#666;margin-top:5px;font-size:14px">Vidéos publiées</div>
+                        </div>
+                        <div class="card" style="text-align:center;padding:25px">
+                            <div style="font-size:40px;margin-bottom:10px">📝</div>
+                            <div id="dash-blogs-count" style="font-size:36px;font-weight:700;color:#1b6b45">—</div>
+                            <div style="color:#666;margin-top:5px;font-size:14px">Articles publiés</div>
+                        </div>
+                        <div class="card" style="text-align:center;padding:25px">
+                            <div style="font-size:40px;margin-bottom:10px">👁️</div>
+                            <div id="dash-visits-count" style="font-size:36px;font-weight:700;color:#1b6b45">—</div>
+                            <div style="color:#666;margin-top:5px;font-size:14px">Visites totales</div>
+                        </div>
+                        <div class="card" style="text-align:center;padding:25px">
+                            <div style="font-size:40px;margin-bottom:10px">📅</div>
+                            <div id="dash-today-count" style="font-size:36px;font-weight:700;color:#c9a84c">—</div>
+                            <div style="color:#666;margin-top:5px;font-size:14px">Visites aujourd'hui</div>
+                        </div>
+                        <div class="card" style="text-align:center;padding:25px">
+                            <div style="font-size:40px;margin-bottom:10px">📆</div>
+                            <div id="dash-week-count" style="font-size:36px;font-weight:700;color:#c9a84c">—</div>
+                            <div style="color:#666;margin-top:5px;font-size:14px">Visites cette semaine</div>
+                        </div>
+                    </div>
+
+                    <!-- Appareils + Pages populaires -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:30px">
+                        <div class="card">
+                            <h3 style="margin-bottom:20px">📱 Appareils</h3>
+                            <div id="dash-device-stats">
+                                <div class="loading-spinner">⏳ Chargement...</div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h3 style="margin-bottom:20px">🔥 Pages populaires</h3>
+                            <div id="dash-top-pages">
+                                <div class="loading-spinner">⏳ Chargement...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions rapides -->
+                    <div class="card">
+                        <h3 style="margin-bottom:20px">⚡ Actions rapides</h3>
+                        <div style="display:flex;gap:15px;flex-wrap:wrap">
+                            <button class="btn-primary" onclick="switchTab('photos')" style="margin-top:0">📸 Ajouter des photos</button>
+                            <button class="btn-primary" onclick="switchTab('videos')" style="margin-top:0">🎥 Ajouter des vidéos</button>
+                            <button class="btn-primary" onclick="switchTab('blog')" style="margin-top:0">📝 Écrire un article</button>
+                            <button class="btn-primary" onclick="switchTab('theme')" style="margin-top:0">🎨 Changer le thème</button>
+                            <button onclick="refreshDashboard()" style="padding:14px 28px;background:#5a7a66;color:white;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:15px;margin-top:0">🔄 Actualiser</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ONGLET PHOTOS -->
+            <div id="tab-photos" class="tab-content">
+                <div class="card">
+                    <h3>📸 Gestion des Photos</h3>
+                    
+                    <div class="form-group">
+                        <label>Section de destination</label>
+                        <select id="photoSection">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="home">🏠 Accueil</option>
+                            <option value="gallery">🖼️ Galerie</option>
+                            <option value="services">💼 Services</option>
+                        </select>
+                    </div>
+
+                    <div class="upload-zone" id="photoUploadZone">
+                        <div class="icon">📷</div>
+                        <p><strong>Cliquez ou glissez vos photos ici</strong></p>
+                        <small>JPG, PNG, GIF, WebP</small>
+                    </div>
+
+                    <input type="file" id="photoInput" accept="image/*" multiple>
+
+                    <div class="progress-bar" id="photoProgress">
+                        <div class="progress-fill">0%</div>
+                    </div>
+
+                    <div class="status-message" id="photoMessage"></div>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Photos publiées</h3>
+                    <div id="photosList" class="items-grid">
+                        <div class="loading-spinner">⏳ Chargement...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ONGLET VIDÉOS -->
+            <div id="tab-videos" class="tab-content">
+                <div class="card">
+                    <h3>🎥 Gestion des Vidéos</h3>
+                    
+                    <div class="form-group">
+                        <label>Section de destination</label>
+                        <select id="videoSection">
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="home">🏠 Accueil</option>
+                            <option value="gallery">🖼️ Galerie</option>
+                            <option value="services">💼 Services</option>
+                        </select>
+                    </div>
+
+                    <div class="upload-zone" id="videoUploadZone">
+                        <div class="icon">🎬</div>
+                        <p><strong>Cliquez ou glissez vos vidéos ici</strong></p>
+                        <small>MP4, WebM (Max 100 MB)</small>
+                    </div>
+
+                    <input type="file" id="videoInput" accept="video/*" multiple>
+
+                    <div class="progress-bar" id="videoProgress">
+                        <div class="progress-fill">0%</div>
+                    </div>
+
+                    <div class="status-message" id="videoMessage"></div>
+                    <!-- Enhanced view populated by admin-dashboard.js -->
+                    <div id="all-photos-list"></div>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Vidéos publiées</h3>
+                    <div id="videosList" class="items-grid">
+                        <div class="loading-spinner">⏳ Chargement...</div>
+                    </div>
+                    <div id="all-videos-list"></div>
+                </div>
+            </div>
+
+            <!-- ONGLET BLOG -->
+            <div id="tab-blog" class="tab-content">
+                <div class="card">
+                    <h3>📝 Créer un Article</h3>
+                    
+                    <form id="blogForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Titre *</label>
+                                <input type="text" id="blogTitle" placeholder="Titre de l'article" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Section *</label>
+                                <select id="blogSection" required>
+                                    <option value="">-- Sélectionnez --</option>
+                                    <option value="home">🏠 Accueil</option>
+                                    <option value="blog-page">📰 Page Blog</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Contenu *</label>
+                            <textarea id="blogContent" placeholder="Écrivez votre article..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Image (optionnel)</label>
+                            <div class="upload-zone" onclick="document.getElementById('blogImage').click()" style="padding: 30px;" id="blogImageZone">
+                                <div class="icon" style="font-size: 48px;">🖼️</div>
+                                <p>Cliquez pour ajouter une image</p>
+                                <small>JPG, PNG, WebP</small>
+                            </div>
+                            <input type="file" id="blogImage" accept="image/*" onchange="previewBlogImage(this)">
+                            <div id="blogImagePreview" style="display:none;margin-top:12px">
+                                <img id="blogImagePreviewImg" style="max-width:100%;max-height:250px;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.15)">
+                                <p style="color:#666;font-size:13px;margin-top:8px">✅ Image sélectionnée</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            ✍️ Publier l'article
+                        </button>
+                    </form>
+
+                    <div class="progress-bar" id="blogProgress">
+                        <div class="progress-fill">0%</div>
+                    </div>
+
+                    <div class="status-message" id="blogMessage"></div>
+                </div>
+
+                <div class="card">
+                    <h3>📋 Articles publiés</h3>
+                    <div id="blogsList" class="items-grid">
+                        <div class="loading-spinner">⏳ Chargement...</div>
+                    </div>
+                    <div id="all-blogs-list"></div>
+                </div>
+            </div>
+
+                        <!-- ONGLET THÈME / COULEURS -->
+            <div id="tab-theme" class="tab-content">
+                <div class="card">
+                    <h3>🎨 Personnalisation des Couleurs du Site</h3>
+                    <p style="color: #666; margin-bottom: 10px;">
+                        Choisissez un thème prédéfini ou créez votre propre palette de couleurs
+                    </p>
+
+                    <!-- Thèmes Prédéfinis -->
+                    <h4 style="margin-top: 30px; margin-bottom: 15px;">✨ Thèmes Prédéfinis</h4>
+                    <div class="theme-presets">
+                        <div class="theme-preset active" style="background: linear-gradient(135deg, #0c3320 0%, #1b6b45 50%, #c9a84c 100%);" onclick="applyPresetTheme('emerald')">
+                            <div class="theme-preset-icon">💎</div>
+                            <div class="theme-preset-name" style="color: #fff;">Émeraude & Or</div>
+                        </div>
+
+                        <div class="theme-preset" style="background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);" onclick="applyPresetTheme('gold')">
+                            <div class="theme-preset-icon">✨</div>
+                            <div class="theme-preset-name" style="color: #000;">Or Classique</div>
+                        </div>
+                        
+                        <div class="theme-preset" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);" onclick="applyPresetTheme('red')">
+                            <div class="theme-preset-icon">❤️</div>
+                            <div class="theme-preset-name" style="color: #fff;">Rouge Passion</div>
+                        </div>
+                        
+                        <div class="theme-preset" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);" onclick="applyPresetTheme('blue')">
+                            <div class="theme-preset-icon">💙</div>
+                            <div class="theme-preset-name" style="color: #fff;">Bleu Océan</div>
+                        </div>
+                        
+                        <div class="theme-preset" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);" onclick="applyPresetTheme('green')">
+                            <div class="theme-preset-icon">🍃</div>
+                            <div class="theme-preset-name" style="color: #fff;">Vert Nature</div>
+                        </div>
+                        
+                        <div class="theme-preset" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);" onclick="applyPresetTheme('purple')">
+                            <div class="theme-preset-icon">💜</div>
+                            <div class="theme-preset-name" style="color: #fff;">Violet Royal</div>
+                        </div>
+                        
+                        <div class="theme-preset" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);" onclick="applyPresetTheme('orange')">
+                            <div class="theme-preset-icon">🧡</div>
+                            <div class="theme-preset-name" style="color: #fff;">Orange Vif</div>
+                        </div>
+                        
+                        <div class="theme-preset" style="background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);" onclick="applyPresetTheme('teal')">
+                            <div class="theme-preset-icon">🌊</div>
+                            <div class="theme-preset-name" style="color: #fff;">Turquoise</div>
+                        </div>
+                        
+                        <div class="theme-preset" style="background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);" onclick="applyPresetTheme('pink')">
+                            <div class="theme-preset-icon">🌸</div>
+                            <div class="theme-preset-name" style="color: #fff;">Rose Éclatant</div>
+                        </div>
+                    </div>
+
+                    <!-- Sélecteur de Couleurs Personnalisées -->
+                    <h4 style="margin-top: 30px; margin-bottom: 15px;">🎨 Couleurs Personnalisées</h4>
+                    <div class="color-picker-group">
+                        <div class="color-picker-row">
+                            <label>Couleur Principale (Or)</label>
+                            <input type="color" id="colorGold" value="#c9a84c" onchange="updatePreview()">
+                            <input type="text" id="colorGoldText" value="#c9a84c" onchange="syncColorPicker('colorGold')">
+                            <div class="color-preview" id="previewGold" style="background: #c9a84c;"></div>
+                        </div>
+                        
+                        <div class="color-picker-row">
+                            <label>Couleur Secondaire (Fond sombre)</label>
+                            <input type="color" id="colorBlack" value="#0c3320" onchange="updatePreview()">
+                            <input type="text" id="colorBlackText" value="#0c3320" onchange="syncColorPicker('colorBlack')">
+                            <div class="color-preview" id="previewBlack" style="background: #0c3320;"></div>
+                        </div>
+                        
+                        <div class="color-picker-row">
+                            <label>Couleur de Fond (Blanc)</label>
+                            <input type="color" id="colorWhite" value="#f5fbf7" onchange="updatePreview()">
+                            <input type="text" id="colorWhiteText" value="#f5fbf7" onchange="syncColorPicker('colorWhite')">
+                            <div class="color-preview" id="previewWhite" style="background: #f5fbf7;"></div>
+                        </div>
+                        
+                        <button class="btn-primary" onclick="applyCustomTheme()" style="margin-top: 20px; width: 100%;">
+                            ✅ Appliquer les couleurs personnalisées
+                        </button>
+                    </div>
+
+                    <!-- Couleurs Avancées depuis Supabase -->
+                    <h4 style="margin-top: 30px; margin-bottom: 15px;">⚙️ Couleurs Avancées (toutes les variables)</h4>
+                    <div class="color-grid" id="colorGrid">
+                        <div class="loading-spinner" style="grid-column:1/-1">⏳ Chargement des couleurs avancées...</div>
+                    </div>
+                    <div style="margin-top:20px">
+                        <button class="btn-save" onclick="saveColors()">💾 Sauvegarder les modifications avancées</button>
+                        <button class="btn-reset" onclick="resetColors()" style="margin-left:10px">🔄 Réinitialiser</button>
+                    </div>
+
+                    <!-- Aperçu -->
+                    <h4 style="margin-top: 30px; margin-bottom: 15px;">👁️ Aperçu</h4>
+                    <div class="theme-preview">
+                        <div class="preview-header">
+                            <h2>En-tête avec fond noir</h2>
+                            <p>Texte blanc sur fond noir</p>
+                        </div>
+                        
+                        <button class="preview-button">Bouton avec couleur principale</button>
+                        <button class="preview-button">Autre bouton</button>
+                        
+                        <div class="preview-card">
+                            <h3>Carte avec ombre</h3>
+                            <p>Ceci est un exemple de carte avec le thème appliqué.</p>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="theme-actions">
+                        <button class="btn-save" onclick="saveThemeToSupabase()">
+                            💾 Sauvegarder le thème
+                        </button>
+                        <button class="btn-reset" onclick="resetTheme()">
+                            🔄 Réinitialiser au thème par défaut
+                        </button>
+                    </div>
+
+                    <div class="status-message" id="themeMessage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/theme-loader.js"></script>
+    <script src="js/hamburger-menu.js"></script>
+
+    <script>
+        (function() {
+            'use strict';
+
+            console.log('🚀 Admin Panel initialisé');
+
+            if (!window.SupabaseDB || !window.SupabaseDB.client()) {
+                alert('❌ Supabase non configuré. Consultez GUIDE_CONFIGURATION_SUPABASE.md');
+                return;
+            }
+
+            const supabase = window.SupabaseDB.client();
+
+            // Mapping identique à theme-loader.js
+            const CSS_MAP = {
+                color_primary:    '--gold',
+                color_secondary:  '--black',
+                color_background: '--white',
+                color_text:       '--text',
+                color_muted:      '--muted',
+                color_accent:     '--accent',
+                color_header_bg:  '--header-bg',
+                color_footer_bg:  '--footer-bg'
+            };
+
+            // AUTHENTIFICATION
+            async function checkAuth() {
+                const { data: { session } } = await supabase.auth.getSession();
+                session ? showAdminPanel() : showLoginScreen();
+            }
+
+            function showLoginScreen() {
+                document.getElementById('loginScreen').style.display = 'flex';
+                document.getElementById('adminPanel').style.display = 'none';
+            }
+
+            function showAdminPanel() {
+                document.getElementById('loginScreen').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                loadAllContent();
+                loadSavedTheme();
+            }
+
+            document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                const btn = document.getElementById('loginBtn');
+                const msg = document.getElementById('loginMessage');
+
+                btn.disabled = true;
+                btn.textContent = '⏳ Connexion...';
+                msg.innerHTML = '';
+
+                try {
+                    const { error } = await supabase.auth.signInWithPassword({ email, password });
+                    if (error) throw error;
+
+                    msg.innerHTML = '<div class="message success">✅ Connexion réussie !</div>';
+                    setTimeout(() => showAdminPanel(), 500);
+
+                } catch (error) {
+                    msg.innerHTML = `<div class="message error">❌ ${error.message}</div>`;
+                    btn.disabled = false;
+                    btn.textContent = 'Se connecter';
+                }
+            });
+
+            window.logout = async function() {
+                if (confirm('Déconnexion ?')) {
+                    await supabase.auth.signOut();
+                    showLoginScreen();
+                }
+            };
+
+            // NAVIGATION
+            window.switchTab = function(tab, btnEl) {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                if (btnEl) {
+                    btnEl.classList.add('active');
+                } else {
+                    // Called from dashboard quick buttons - find matching tab button
+                    document.querySelectorAll('.tab-btn').forEach(b => {
+                        if(b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + tab + "'")) b.classList.add('active');
+                    });
+                }
+                document.getElementById('tab-' + tab).classList.add('active');
+
+                if (tab === 'theme') loadThemeColors();
+                if (tab === 'dashboard') loadDashboard();
+            };
+
+            // PHOTOS (code existant)
+            const photoZone = document.getElementById('photoUploadZone');
+            const photoInput = document.getElementById('photoInput');
+
+            photoZone.addEventListener('click', () => photoInput.click());
+            photoZone.addEventListener('dragover', e => {
+                e.preventDefault();
+                photoZone.classList.add('dragover');
+            });
+            photoZone.addEventListener('dragleave', () => photoZone.classList.remove('dragover'));
+            photoZone.addEventListener('drop', e => {
+                e.preventDefault();
+                photoZone.classList.remove('dragover');
+                photoInput.files = e.dataTransfer.files;
+                handlePhotoUpload();
+            });
+            photoInput.addEventListener('change', handlePhotoUpload);
+
+            async function handlePhotoUpload() {
+                const files = photoInput.files;
+                const section = document.getElementById('photoSection').value;
+
+                if (!section) { showMessage('photo', '⚠️ Sélectionnez une section', 'error'); return; }
+                if (files.length === 0) return;
+
+                const bar = document.getElementById('photoProgress');
+                const fill = bar.querySelector('.progress-fill');
+                bar.style.display = 'block';
+
+                try {
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+                        const progress = Math.round(((i + 1) / files.length) * 100);
+                        fill.style.width = progress + '%';
+                        fill.textContent = progress + '%';
+
+                        const url = await window.SupabaseDB.uploadFile(file, 'photos');
+                        await window.SupabaseDB.addPhoto(file.name, url, section);
+                    }
+
+                    bar.style.display = 'none';
+                    photoInput.value = '';
+                    showMessage('photo', `✅ ${files.length} photo(s) ajoutée(s)`, 'success');
+                    loadPhotos();
+                } catch (error) {
+                    showMessage('photo', `❌ ${error.message}`, 'error');
+                    bar.style.display = 'none';
+                }
+            }
+
+            async function loadPhotos() {
+                const container = document.getElementById('photosList');
+                container.innerHTML = '<div class="loading-spinner">⏳ Chargement...</div>';
+
+                try {
+                    const photos = await window.SupabaseDB.getPhotos();
+                    
+                    if (photos.length === 0) {
+                        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📷</div><p>Aucune photo</p></div>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    photos.forEach(p => {
+                        const card = document.createElement('div');
+                        card.className = 'item-card';
+                        card.innerHTML = `
+                            <img src="${p.url}" alt="${p.name}" loading="lazy">
+                            <div class="item-content">
+                                <h4>${p.name}</h4>
+                                <div class="item-meta">
+                                    <span class="item-section">${p.section}</span>
+                                    <span>${new Date(p.created_at).toLocaleDateString('fr-FR')}</span>
+                                </div>
+                                <button class="btn-delete" onclick="deletePhoto('${p.id}')">🗑️ Supprimer</button>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                } catch (error) {
+                    container.innerHTML = '<div class="empty-state"><p style="color: #dc3545;">Erreur</p></div>';
+                }
+            }
+
+            window.deletePhoto = async function(id) {
+                if (!confirm('Supprimer ?')) return;
+                try {
+                    await window.SupabaseDB.deletePhoto(id);
+                    showMessage('photo', '✅ Supprimée', 'success');
+                    loadPhotos();
+                } catch (error) {
+                    showMessage('photo', '❌ Erreur', 'error');
+                }
+            };
+
+            // VIDÉOS (code existant similaire aux photos)
+            const videoZone = document.getElementById('videoUploadZone');
+            const videoInput = document.getElementById('videoInput');
+
+            videoZone.addEventListener('click', () => videoInput.click());
+            videoZone.addEventListener('dragover', e => {
+                e.preventDefault();
+                videoZone.classList.add('dragover');
+            });
+            videoZone.addEventListener('dragleave', () => videoZone.classList.remove('dragover'));
+            videoZone.addEventListener('drop', e => {
+                e.preventDefault();
+                videoZone.classList.remove('dragover');
+                videoInput.files = e.dataTransfer.files;
+                handleVideoUpload();
+            });
+            videoInput.addEventListener('change', handleVideoUpload);
+
+            async function handleVideoUpload() {
+                const files = videoInput.files;
+                const section = document.getElementById('videoSection').value;
+
+                if (!section) { showMessage('video', '⚠️ Sélectionnez une section', 'error'); return; }
+                if (files.length === 0) return;
+
+                const bar = document.getElementById('videoProgress');
+                const fill = bar.querySelector('.progress-fill');
+                bar.style.display = 'block';
+
+                try {
+                    for (let i = 0; i < files.length; i++) {
+                        const file = files[i];
+                        const progress = Math.round(((i + 1) / files.length) * 100);
+                        fill.style.width = progress + '%';
+                        fill.textContent = progress + '%';
+
+                        const url = await window.SupabaseDB.uploadFile(file, 'videos');
+                        await window.SupabaseDB.addVideo(file.name, url, section, file.type);
+                    }
+
+                    bar.style.display = 'none';
+                    videoInput.value = '';
+                    showMessage('video', `✅ ${files.length} vidéo(s) ajoutée(s)`, 'success');
+                    loadVideos();
+                } catch (error) {
+                    showMessage('video', `❌ ${error.message}`, 'error');
+                    bar.style.display = 'none';
+                }
+            }
+
+            async function loadVideos() {
+                const container = document.getElementById('videosList');
+                container.innerHTML = '<div class="loading-spinner">⏳ Chargement...</div>';
+
+                try {
+                    const videos = await window.SupabaseDB.getVideos();
+                    
+                    if (videos.length === 0) {
+                        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎥</div><p>Aucune vidéo</p></div>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    videos.forEach(v => {
+                        const card = document.createElement('div');
+                        card.className = 'item-card';
+                        card.innerHTML = `
+                            <video src="${v.url}" controls preload="metadata" controlslist="nodownload" style="height: 200px;"></video>
+                            <div class="item-content">
+                                <h4>${v.name}</h4>
+                                <div class="item-meta">
+                                    <span class="item-section">${v.section}</span>
+                                    <span>${new Date(v.created_at).toLocaleDateString('fr-FR')}</span>
+                                </div>
+                                <button class="btn-delete" onclick="deleteVideo('${v.id}')">🗑️ Supprimer</button>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                } catch (error) {
+                    container.innerHTML = '<div class="empty-state"><p style="color: #dc3545;">Erreur</p></div>';
+                }
+            }
+
+            window.deleteVideo = async function(id) {
+                if (!confirm('Supprimer ?')) return;
+                try {
+                    await window.SupabaseDB.deleteVideo(id);
+                    showMessage('video', '✅ Supprimée', 'success');
+                    loadVideos();
+                } catch (error) {
+                    showMessage('video', '❌ Erreur', 'error');
+                }
+            };
+
+            // BLOG : géré par admin-dashboard.js (supporte création ET modification)
+            // Le gestionnaire submit est attaché dans admin-dashboard.js via handleBlogSubmit
+            // Ne pas rajouter de listener ici pour éviter la double soumission
+
+            async function loadBlogs() {
+                const container = document.getElementById('blogsList');
+                container.innerHTML = '<div class="loading-spinner">⏳ Chargement...</div>';
+
+                try {
+                    const blogs = await window.SupabaseDB.getBlogs();
+                    
+                    if (blogs.length === 0) {
+                        container.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📝</div><p>Aucun article</p></div>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    blogs.forEach(b => {
+                        const card = document.createElement('div');
+                        card.className = 'item-card';
+                        card.innerHTML = `
+                            ${b.image_url ? `<img src="${b.image_url}" alt="${b.title}">` : '<div style="height: 200px; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; font-size: 64px;">📝</div>'}
+                            <div class="item-content">
+                                <h4>${b.title}</h4>
+                                <p style="color: #666; font-size: 14px; margin: 10px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">${b.content}</p>
+                                <div class="item-meta">
+                                    <span class="item-section">${b.section}</span>
+                                    <span>${new Date(b.date).toLocaleDateString('fr-FR')}</span>
+                                </div>
+                                <button class="btn-delete" onclick="deleteBlog('${b.id}')">🗑️ Supprimer</button>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                } catch (error) {
+                    container.innerHTML = '<div class="empty-state"><p style="color: #dc3545;">Erreur</p></div>';
+                }
+            }
+
+            window.deleteBlog = async function(id) {
+                if (!confirm('Supprimer ?')) return;
+                try {
+                    await window.SupabaseDB.deleteBlog(id);
+                    showMessage('blog', '✅ Supprimé', 'success');
+                    loadBlogs();
+                } catch (error) {
+                    showMessage('blog', '❌ Erreur', 'error');
+                }
+            };
+
+            // ========================================
+            // GESTION DES COULEURS DU THÈME
+            // ========================================
+
+            const colorDescriptions = {
+                'color_primary': 'Couleur Principale (Or)',
+                'color_secondary': 'Couleur Secondaire (Noir)',
+                'color_background': 'Couleur de Fond',
+                'color_text': 'Couleur du Texte',
+                'color_muted': 'Couleur Texte Secondaire',
+                'color_accent': 'Couleur d\'Accentuation',
+                'color_header_bg': 'Fond de l\'En-tête',
+                'color_footer_bg': 'Fond du Pied de Page'
+            };
+
+            async function loadThemeColors() {
+                const container = document.getElementById('colorGrid');
+                container.innerHTML = '<div class="loading-spinner">⏳ Chargement des couleurs...</div>';
+
+                try {
+                    const { data, error } = await supabase
+                        .from('site_settings')
+                        .select('*')
+                        .eq('setting_type', 'color')
+                        .order('setting_key');
+
+                    if (error) throw error;
+
+                    if (!data || data.length === 0) {
+                        container.innerHTML = '<div class="empty-state"><p style="color: #dc3545;">Aucune couleur trouvée. Exécutez le script SQL de configuration.</p></div>';
+                        return;
+                    }
+
+                    container.innerHTML = '';
+                    data.forEach(color => {
+                        const colorItem = document.createElement('div');
+                        colorItem.className = 'color-item';
+                        colorItem.innerHTML = `
+                            <label>${colorDescriptions[color.setting_key] || color.setting_key}</label>
+                            <div class="color-input-wrapper">
+                                <input 
+                                    type="color" 
+                                    id="${color.setting_key}-picker" 
+                                    value="${color.setting_value}"
+                                    onchange="updateColorPreview('${color.setting_key}')"
+                                >
+                                <input 
+                                    type="text" 
+                                    id="${color.setting_key}-text" 
+                                    value="${color.setting_value}"
+                                    placeholder="#000000"
+                                    onchange="updateColorPicker('${color.setting_key}')"
+                                >
+                            </div>
+                            <div class="color-preview" id="${color.setting_key}-preview" style="background: ${color.setting_value};"></div>
+                        `;
+                        container.appendChild(colorItem);
+                    });
+
+                    console.log(`✅ ${data.length} couleurs chargées`);
+
+                } catch (error) {
+                    console.error('❌ Erreur chargement couleurs:', error);
+                    container.innerHTML = '<div class="empty-state"><p style="color: #dc3545;">Erreur de chargement</p></div>';
+                }
+            }
+
+            window.updateColorPreview = function(key) {
+                const picker = document.getElementById(key + '-picker');
+                const text = document.getElementById(key + '-text');
+                const preview = document.getElementById(key + '-preview');
+                
+                text.value = picker.value;
+                preview.style.background = picker.value;
+
+                // Appliquer immédiatement pour l'aperçu dans l'admin
+                applyColorToAdmin(key, picker.value);
+            };
+
+            window.updateColorPicker = function(key) {
+                const picker = document.getElementById(key + '-picker');
+                const text = document.getElementById(key + '-text');
+                const preview = document.getElementById(key + '-preview');
+                
+                if (/^#[0-9A-F]{6}$/i.test(text.value)) {
+                    picker.value = text.value;
+                    preview.style.background = text.value;
+                    applyColorToAdmin(key, text.value);
+                }
+            };
+
+            function applyColorToAdmin(key, value) {
+                const colorMap = {
+                    'color_primary': '--gold',
+                    'color_secondary': '--black',
+                    'color_background': '--white',
+                    'color_text': '--text',
+                    'color_muted': '--muted',
+                    'color_accent': '--accent',
+                    'color_header_bg': '--header-bg',
+                    'color_footer_bg': '--footer-bg'
+                };
+
+                const cssVar = colorMap[key];
+                if (cssVar) {
+                    document.documentElement.style.setProperty(cssVar, value);
+                }
+            }
+
+            window.saveColors = async function() {
+                const btn = event.target;
+                btn.disabled = true;
+                btn.textContent = '⏳ Sauvegarde...';
+
+                try {
+                    const { data: { user } } = await supabase.auth.getUser();
+                    const updates = [];
+
+                    for (const key in colorDescriptions) {
+                        const textInput = document.getElementById(key + '-text');
+                        if (textInput) {
+                            updates.push({
+                                setting_key: key,
+                                setting_value: textInput.value,
+                                updated_at: new Date().toISOString(),
+                                updated_by: user?.email
+                            });
+                        }
+                    }
+
+                    for (const update of updates) {
+                        const { error } = await supabase
+                            .from('site_settings')
+                            .update({
+                                setting_value: update.setting_value,
+                                updated_at: update.updated_at,
+                                updated_by: update.updated_by
+                            })
+                            .eq('setting_key', update.setting_key);
+
+                        if (error) throw error;
+                    }
+
+                    // Propager immédiatement via le cache partagé
+                    const allVars = {};
+                    for (const key in CSS_MAP) {
+                        const el = document.getElementById(key + '-text');
+                        if (el) allVars[CSS_MAP[key]] = el.value;
+                    }
+                    if (window.MiraLocksTheme) window.MiraLocksTheme.save(allVars);
+                    showMessage('theme', '✅ Couleurs sauvegardées ! Actives sur toutes les pages.', 'success');
+                    console.log('✅ Couleurs sauvegardées dans Supabase');
+
+                } catch (error) {
+                    console.error('❌ Erreur sauvegarde:', error);
+                    showMessage('theme', `❌ Erreur : ${error.message}`, 'error');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = '💾 Sauvegarder les modifications';
+                }
+            };
+
+            window.resetColors = async function() {
+                if (!confirm('Réinitialiser toutes les couleurs aux valeurs par défaut ?')) return;
+
+                const defaults = {
+                    'color_primary': '#d4af37',
+                    'color_secondary': '#1a1a1a',
+                    'color_background': '#f8f8f8',
+                    'color_text': '#1a1a1a',
+                    'color_muted': '#666666',
+                    'color_accent': '#c19d2f',
+                    'color_header_bg': '#1a1a1a',
+                    'color_footer_bg': '#1a1a1a'
+                };
+
+                try {
+                    const { data: { user } } = await supabase.auth.getUser();
+
+                    for (const [key, value] of Object.entries(defaults)) {
+                        const { error } = await supabase
+                            .from('site_settings')
+                            .update({
+                                setting_value: value,
+                                updated_at: new Date().toISOString(),
+                                updated_by: user?.email
+                            })
+                            .eq('setting_key', key);
+
+                        if (error) throw error;
+                    }
+
+                    showMessage('theme', '✅ Couleurs réinitialisées !', 'success');
+                    loadThemeColors();
+
+                } catch (error) {
+                    console.error('❌ Erreur réinitialisation:', error);
+                    showMessage('theme', `❌ Erreur : ${error.message}`, 'error');
+                }
+            };
+
+
+            // ========================================
+            // GESTION DES THÈMES PRESETS
+            // ========================================
+            
+            const THEME_PRESETS = {
+                emerald: { name: 'Émeraude & Or', gold: '#c9a84c', black: '#0c3320', white: '#f5fbf7' },
+                gold: { name: 'Or Classique', gold: '#d4af37', black: '#000000', white: '#ffffff' },
+                red: { name: 'Rouge Passion', gold: '#e74c3c', black: '#2c3e50', white: '#ffffff' },
+                blue: { name: 'Bleu Océan', gold: '#3498db', black: '#1a1a2e', white: '#ffffff' },
+                green: { name: 'Vert Nature', gold: '#2ecc71', black: '#1e2a2a', white: '#ffffff' },
+                purple: { name: 'Violet Royal', gold: '#9b59b6', black: '#2c2c54', white: '#ffffff' },
+                orange: { name: 'Orange Vif', gold: '#f39c12', black: '#2c2416', white: '#ffffff' },
+                teal: { name: 'Turquoise', gold: '#1abc9c', black: '#0e1b1b', white: '#ffffff' },
+                pink: { name: 'Rose Éclatant', gold: '#e91e63', black: '#2c1a24', white: '#ffffff' }
+            };
+
+            window.applyPresetTheme = function(presetName) {
+                const preset = THEME_PRESETS[presetName];
+                if (!preset) return;
+                
+                // Mettre à jour l'affichage visuel du preset actif
+                document.querySelectorAll('.theme-preset').forEach(p => p.classList.remove('active'));
+                event.target.closest('.theme-preset').classList.add('active');
+                
+                // Appliquer le thème
+                applyThemeColors(preset.gold, preset.black, preset.white);
+                
+                // Mettre à jour les sélecteurs de couleurs
+                updateColorInputs(preset.gold, preset.black, preset.white);
+                
+                showMessage('theme', `Thème "${preset.name}" appliqué`, 'success');
+            };
+
+            window.applyCustomTheme = function() {
+                const gold = document.getElementById('colorGold').value;
+                const black = document.getElementById('colorBlack').value;
+                const white = document.getElementById('colorWhite').value;
+                
+                applyThemeColors(gold, black, white);
+                
+                // Retirer l'indicateur actif des presets
+                document.querySelectorAll('.theme-preset').forEach(p => p.classList.remove('active'));
+                
+                showMessage('theme', 'Thème personnalisé appliqué', 'success');
+            };
+
+            function applyThemeColors(gold, black, white) {
+                document.documentElement.style.setProperty('--gold', gold);
+                document.documentElement.style.setProperty('--black', black);
+                document.documentElement.style.setProperty('--white', white);
+                document.documentElement.style.setProperty('--accent', gold);
+                
+                // Sauvegarder localement pour l'aperçu
+                localStorage.setItem('miralocks_theme_preview', JSON.stringify({gold, black, white}));
+            }
+
+            function updateColorInputs(gold, black, white) {
+                document.getElementById('colorGold').value = gold;
+                document.getElementById('colorGoldText').value = gold;
+                document.getElementById('previewGold').style.background = gold;
+                
+                document.getElementById('colorBlack').value = black;
+                document.getElementById('colorBlackText').value = black;
+                document.getElementById('previewBlack').style.background = black;
+                
+                document.getElementById('colorWhite').value = white;
+                document.getElementById('colorWhiteText').value = white;
+                document.getElementById('previewWhite').style.background = white;
+            }
+
+            window.updatePreview = function() {
+                const gold = document.getElementById('colorGold').value;
+                const black = document.getElementById('colorBlack').value;
+                const white = document.getElementById('colorWhite').value;
+                
+                document.getElementById('colorGoldText').value = gold;
+                document.getElementById('previewGold').style.background = gold;
+                
+                document.getElementById('colorBlackText').value = black;
+                document.getElementById('previewBlack').style.background = black;
+                
+                document.getElementById('colorWhiteText').value = white;
+                document.getElementById('previewWhite').style.background = white;
+                
+                applyThemeColors(gold, black, white);
+            };
+
+            window.syncColorPicker = function(id) {
+                const textInput = document.getElementById(id + 'Text');
+                const colorInput = document.getElementById(id);
+                const preview = document.getElementById('preview' + id.replace('color', ''));
+                
+                if (/^#[0-9A-F]{6}$/i.test(textInput.value)) {
+                    colorInput.value = textInput.value;
+                    preview.style.background = textInput.value;
+                    updatePreview();
+                }
+            };
+
+            window.saveThemeToSupabase = async function() {
+                const gold = document.getElementById('colorGold').value;
+                const black = document.getElementById('colorBlack').value;
+                const white = document.getElementById('colorWhite').value;
+
+                try {
+                    const { data: { user } } = await supabase.auth.getUser();
+
+                    // Sauvegarder les 3 couleurs principales dans site_settings
+                    const updates = [
+                        { key: 'color_primary', value: gold },
+                        { key: 'color_secondary', value: black },
+                        { key: 'color_background', value: white }
+                    ];
+
+                    for (const update of updates) {
+                        const { error } = await supabase
+                            .from('site_settings')
+                            .upsert({
+                                setting_key: update.key,
+                                setting_value: update.value,
+                                setting_type: 'color',
+                                updated_at: new Date().toISOString(),
+                                updated_by: user?.email
+                            }, {
+                                onConflict: 'setting_key'
+                            });
+
+                        if (error) throw error;
+                    }
+
+                    // Sauvegarder aussi en localStorage pour usage local
+                    const theme = { gold, black, white, timestamp: new Date().toISOString() };
+                    localStorage.setItem('miralocks_theme', JSON.stringify(theme));
+
+                    // Propager immédiatement via le cache partagé
+                    if (window.MiraLocksTheme) {
+                        window.MiraLocksTheme.save({
+                            '--gold': gold, '--black': black, '--white': white, '--accent': gold
+                        });
+                    }
+                    showMessage('theme', '✅ Thème sauvegardé ! Actif sur toutes les pages.', 'success');
+
+                } catch (error) {
+                    console.error('Erreur sauvegarde thème:', error);
+                    showMessage('theme', `❌ Erreur : ${error.message}`, 'error');
+                }
+            };
+
+            window.resetTheme = async function() {
+                if (!confirm('Voulez-vous vraiment réinitialiser au thème par défaut (Or Classique) ?')) return;
+
+                const defaultTheme = THEME_PRESETS.gold;
+                applyThemeColors(defaultTheme.gold, defaultTheme.black, defaultTheme.white);
+                updateColorInputs(defaultTheme.gold, defaultTheme.black, defaultTheme.white);
+
+                try {
+                    const { data: { user } } = await supabase.auth.getUser();
+
+                    const updates = [
+                        { key: 'color_primary', value: defaultTheme.gold },
+                        { key: 'color_secondary', value: defaultTheme.black },
+                        { key: 'color_background', value: defaultTheme.white }
+                    ];
+
+                    for (const update of updates) {
+                        const { error } = await supabase
+                            .from('site_settings')
+                            .upsert({
+                                setting_key: update.key,
+                                setting_value: update.value,
+                                setting_type: 'color',
+                                updated_at: new Date().toISOString(),
+                                updated_by: user?.email
+                            }, {
+                                onConflict: 'setting_key'
+                            });
+
+                        if (error) throw error;
+                    }
+
+                    if (window.MiraLocksTheme) window.MiraLocksTheme.clear();
+
+                    // Réactiver le preset or
+                    document.querySelectorAll('.theme-preset').forEach(p => p.classList.remove('active'));
+                    const goldPreset = document.querySelector('.theme-preset[onclick*="gold"]');
+                    if (goldPreset) goldPreset.classList.add('active');
+
+                    showMessage('theme', 'Thème réinitialisé au thème par défaut', 'success');
+
+                } catch (error) {
+                    console.error('Erreur réinitialisation thème:', error);
+                    showMessage('theme', `❌ Erreur : ${error.message}`, 'error');
+                }
+            };
+
+            async function loadSavedTheme() {
+                try {
+                    // Charger depuis Supabase
+                    const { data, error } = await supabase
+                        .from('site_settings')
+                        .select('*')
+                        .in('setting_key', ['color_primary', 'color_secondary', 'color_background']);
+
+                    if (!error && data && data.length > 0) {
+                        const theme = {
+                            gold: data.find(d => d.setting_key === 'color_primary')?.setting_value || '#d4af37',
+                            black: data.find(d => d.setting_key === 'color_secondary')?.setting_value || '#000000',
+                            white: data.find(d => d.setting_key === 'color_background')?.setting_value || '#ffffff'
+                        };
+
+                        applyThemeColors(theme.gold, theme.black, theme.white);
+                        updateColorInputs(theme.gold, theme.black, theme.white);
+                        console.log('✅ Thème chargé depuis Supabase');
+                        return;
+                    }
+                } catch (e) {
+                    console.log('Pas de thème dans Supabase, utilisation du thème par défaut');
+                }
+
+                // Fallback: charger depuis localStorage
+                const savedTheme = localStorage.getItem('miralocks_theme');
+                if (savedTheme) {
+                    try {
+                        const theme = JSON.parse(savedTheme);
+                        applyThemeColors(theme.gold, theme.black, theme.white);
+                        updateColorInputs(theme.gold, theme.black, theme.white);
+                        console.log('✅ Thème chargé depuis localStorage');
+                    } catch (e) {
+                        console.error('Erreur lors du chargement du thème:', e);
+                    }
+                }
+            }
+
+
+            // ========================================
+            // DASHBOARD - Chargement des statistiques
+            // ========================================
+            async function loadDashboard() {
+                try {
+                    // Contenu
+                    const photos = await window.SupabaseDB.getPhotos();
+                    const videos = await window.SupabaseDB.getVideos();
+                    const blogs  = await window.SupabaseDB.getBlogs();
+
+                    document.getElementById('dash-photos-count').textContent = photos.length;
+                    document.getElementById('dash-videos-count').textContent = videos.length;
+                    document.getElementById('dash-blogs-count').textContent  = blogs.length;
+
+                    // Appareils
+                    const deviceContainer = document.getElementById('dash-device-stats');
+                    if (window.MiraLocksAnalytics) {
+                        const stats = await window.MiraLocksAnalytics.getGlobalStats();
+                        if (stats) {
+                            document.getElementById('dash-visits-count').textContent = stats.totalVisits;
+                            document.getElementById('dash-today-count').textContent  = stats.todayVisits;
+                            document.getElementById('dash-week-count').textContent   = stats.weekVisits;
+
+                            const d = stats.deviceStats;
+                            const total = d.mobile + d.tablet + d.desktop || 1;
+                            deviceContainer.innerHTML = `
+                                <div style="margin-bottom:12px">
+                                    <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>📱 Mobile</span><strong>${d.mobile} (${Math.round(d.mobile/total*100)}%)</strong></div>
+                                    <div style="background:#e8f5ee;border-radius:4px;height:8px"><div style="background:#1b6b45;width:${d.mobile/total*100}%;height:100%;border-radius:4px"></div></div>
+                                </div>
+                                <div style="margin-bottom:12px">
+                                    <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>💻 Bureau</span><strong>${d.desktop} (${Math.round(d.desktop/total*100)}%)</strong></div>
+                                    <div style="background:#e8f5ee;border-radius:4px;height:8px"><div style="background:#c9a84c;width:${d.desktop/total*100}%;height:100%;border-radius:4px"></div></div>
+                                </div>
+                                <div>
+                                    <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span>📟 Tablette</span><strong>${d.tablet} (${Math.round(d.tablet/total*100)}%)</strong></div>
+                                    <div style="background:#e8f5ee;border-radius:4px;height:8px"><div style="background:#3498db;width:${d.tablet/total*100}%;height:100%;border-radius:4px"></div></div>
+                                </div>`;
+
+                            // Top pages
+                            const pagesContainer = document.getElementById('dash-top-pages');
+                            if (stats.topPages && stats.topPages.length > 0) {
+                                pagesContainer.innerHTML = stats.topPages.map(p =>
+                                    `<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f0">
+                                        <span style="color:#333">${p.page || '/'}</span>
+                                        <strong style="color:#1b6b45">${p.count} visites</strong>
+                                    </div>`
+                                ).join('');
+                            } else {
+                                pagesContainer.innerHTML = '<p style="color:#999;text-align:center;padding:20px">Aucune donnée disponible</p>';
+                            }
+                        } else {
+                            deviceContainer.innerHTML = '<p style="color:#999;text-align:center">Statistiques non disponibles</p>';
+                            ['dash-visits-count','dash-today-count','dash-week-count'].forEach(id => {
+                                document.getElementById(id).textContent = '—';
+                            });
+                        }
+                    } else {
+                        deviceContainer.innerHTML = '<p style="color:#999;font-size:13px;text-align:center">Analytics non chargé</p>';
+                    }
+                } catch(e) {
+                    console.error('❌ Erreur dashboard:', e);
+                }
+            }
+
+            window.refreshDashboard = function() { loadDashboard(); };
+
+            window.previewBlogImage = function(input) {
+                const file = input.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('blogImagePreviewImg').src = e.target.result;
+                    document.getElementById('blogImagePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            };
+
+            // UTILITAIRES
+            function showMessage(type, text, status) {
+                const msg = document.getElementById(type + 'Message');
+                msg.className = `status-message ${status} show`;
+                msg.textContent = text;
+                setTimeout(() => msg.classList.remove('show'), 5000);
+            }
+
+            function loadAllContent() {
+                loadPhotos();
+                loadVideos();
+                loadBlogs();
+                loadDashboard();
+            }
+
+            // INIT
+            window.addEventListener('load', checkAuth);
+
+        })();
+    </script>
+    <!-- SCRIPTS ANALYTICS ET DASHBOARD -->
+    <script src="js/analytics-tracker.js"></script>
+    <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+/*
+ * optimize.css — MiraLocks — Version corrigée & allégée
+ * À charger EN DERNIER dans chaque page HTML
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Rôle : corrections de dernier recours sans !important abusifs,
+ *        suppression des loaders, sécurité overflow, safe-area iPhone.
+ * NE PAS dupliquer : galerie, nav, hamburger → déjà dans styles.css
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+/* ═══════════════════════════════════════════════════════════
+   1. SUPPRESSION DES LOADERS / INTRO
+═══════════════════════════════════════════════════════════ */
+.page-loader,
+.site-loader,
+.intro-overlay,
+.splash-screen,
+.preloader {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Contenu visible immédiatement */
+body {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   2. SÉCURITÉ OVERFLOW — aucun élément ne dépasse l'écran
+═══════════════════════════════════════════════════════════ */
+body { overflow-x: hidden; }
+
+.container,
+.hero-inner,
+.services,
+.gallery,
+.gallery-photos,
+.gallery-videos,
+.form-row {
+  max-width: 100%;
+}
+
+img, video, iframe, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Éviter le CLS sur les images */
+img { content-visibility: auto; }
+
+/* ═══════════════════════════════════════════════════════════
+   3. CORRECTIF VISIBILITÉ — textes & fonds (sans !important excessif)
+   Appliqués uniquement là où les variables CSS ne suffisent pas.
+═══════════════════════════════════════════════════════════ */
+body {
+  background: var(--white-off, #f5fbf7);
+  color: var(--text, #0c2818);
+}
+
+section {
+  background: var(--white);
+  color: var(--text, #0c2818);
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--text, #0c2818); }
+p                        { color: var(--gray-700, #253d30); }
+.muted                   { color: var(--muted, #5a7a66); }
+
+/* Header */
+.header {
+  background: rgba(12,51,32,.97) !important;
+}
+
+.brand h1 {
+  color: var(--gold, #c9a84c);
+}
+
+#main-nav a { color: var(--white); }
+
+/* Footer */
+.footer { background: var(--emerald-deep, #0c3320) !important; color: var(--white); }
+.footer h3, .footer h4 { color: var(--white); }
+.footer p, .footer small { color: var(--gray-300); }
+
+/* Cards */
+.card {
+  background: var(--white);
+  color: var(--text, #0c2818);
+  border: 1px solid var(--gray-200, #dceee4);
+}
+.card h3 { color: var(--text, #0c2818); }
+.card p  { color: var(--gray-600, #3d5c4a); }
+
+/* CTA */
+.cta, a.cta, button.primary, .primary {
+  background: var(--gold-gradient, linear-gradient(135deg, #c9a84c 0%, #e8d080 50%, #c9a84c 100%));
+  color: var(--black);
+}
+
+/* Formulaires */
+input, textarea, select {
+  background: var(--white);
+  color: var(--text, #0c2818);
+  border: 2px solid var(--gray-200, #dceee4);
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--gold, #c9a84c);
+  outline: none;
+}
+
+/* Boutons flottants */
+.whatsapp-float {
+  background: var(--gold-gradient, #c9a84c) !important;
+  color: var(--black) !important;
+  font-weight: 700;
+  z-index: 1000;
+}
+.admin-float {
+  background: rgba(12,51,32,.90) !important;
+  border: 2px solid var(--gold, #c9a84c) !important;
+  z-index: 1000;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, #e8f5ee 0%, #ffffff 100%);
+}
+.hero h2 { color: var(--text, #0c2818); }
+
+/* ═══════════════════════════════════════════════════════════
+   4. SAFE AREA — iPhone notch / home bar
+═══════════════════════════════════════════════════════════ */
+@supports (padding: max(0px)) {
+  @media (max-width: 767px) {
+    .header {
+      padding-top: max(10px, env(safe-area-inset-top));
+    }
+    .footer {
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
+    }
+    #main-nav {
+      padding-top: max(80px, calc(env(safe-area-inset-top) + 80px));
+      padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+    .whatsapp-float {
+      bottom: max(14px, calc(env(safe-area-inset-bottom) + 14px));
+      right:  max(14px, env(safe-area-inset-right));
+    }
+    .admin-float {
+      bottom: max(84px, calc(env(safe-area-inset-bottom) + 84px));
+      right:  max(14px, env(safe-area-inset-right));
+    }
+    .lightbox-close {
+      top:   max(10px, env(safe-area-inset-top));
+      right: max(10px, env(safe-area-inset-right));
+    }
+    .lightbox-counter {
+      bottom: max(20px, env(safe-area-inset-bottom));
+    }
+    .lightbox-prev {
+      left: max(10px, env(safe-area-inset-left));
+    }
+    .lightbox-next {
+      right: max(10px, env(safe-area-inset-right));
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   5. ACCESSIBILITÉ — MOUVEMENTS RÉDUITS
+═══════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .page-loader { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   6. IMPRESSION
+═══════════════════════════════════════════════════════════ */
+@media print {
+  .header, .footer, .whatsapp-float, .admin-float,
+  .hamburger-menu, .nav-overlay, #scroll-progress,
+  .lightbox-swipe { display: none !important; }
+  body  { color: #000 !important; background: #fff !important; }
+  a     { color: #000 !important; text-decoration: underline; }
+  .container { max-width: 100%; padding: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   7. CORRECTION MOBILE FINALE — transitions courtes
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+  /* Sur mobile, transitions raccourcies pour fluidité */
+  .card, .gallery-item, .cta, a.cta, button.primary {
+    transition-duration: .18s !important;
+  }
+  /* Désactiver le tilt card sur mobile */
+  .card { transform: none !important; }
+}
+
+@media (max-width: 1023px) {
+  /* Tablette : pas de tilt non plus */
+  .card { transform: none !important; }
+}

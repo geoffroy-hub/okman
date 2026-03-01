@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FAQ — MiraLocks</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta name="description" content="Questions fréquentes sur l'Institut MiraLocks – salon de locks à Lomé, Togo. Horaires, services, tarifs, rendez-vous.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.miralocks.com/faq.html">
+<meta property="og:title" content="FAQ – Institut MiraLocks | Questions fréquentes">
+<meta property="og:description" content="Toutes les réponses à vos questions sur l'Institut MiraLocks – salon spécialisé en locks à Lomé, Togo.">
+<meta property="og:image" content="https://www.miralocks.com/assets/logo.png">
+<meta property="og:locale" content="fr_TG">
+<meta property="og:site_name" content="Institut MiraLocks">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FAQ – Institut MiraLocks | Questions fréquentes">
+<meta name="twitter:description" content="Toutes les réponses à vos questions sur l'Institut MiraLocks – salon spécialisé en locks à Lomé, Togo.">
+<meta name="twitter:image" content="https://www.miralocks.com/assets/logo.png">
+<link rel="canonical" href="https://www.miralocks.com/faq.html">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#c9a84c">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/optimize.css">
+<script src="js/dynamic-colors.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Quels sont vos horaires d'ouverture ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nous sommes ouverts du mardi au samedi de 8h à 18h. Fermé le dimanche et le lundi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Comment prendre rendez-vous ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vous pouvez prendre rendez-vous via notre formulaire en ligne sur la page Rendez-vous, ou directement par WhatsApp au +228 97 98 90 01."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Combien coûte la création de locks ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La création de locks commence à partir de 15 000 FCFA. Le tarif exact dépend de la longueur et de la densité de vos cheveux. Contactez-nous pour un devis personnalisé."
+      }
+    }
+  ],
+  "publisher": {
+    "@type": "HairSalon",
+    "name": "Institut MiraLocks",
+    "telephone": "+22897989001",
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "08:00", "closes": "18:00" }
+    ]
+  }
+}
+</script>
+<style>
+  .faq-hero {
+    background: linear-gradient(135deg, #0c3320, #1b6b45);
+    padding: 56px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  .faq-hero h2 { color: var(--gold, #c9a84c); font-size: clamp(1.7rem,4vw,2.5rem); margin-bottom: 10px; }
+  .faq-hero p  { color: rgba(255,255,255,.8); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+  .faq-categories {
+    display: flex; gap: 10px; flex-wrap: wrap; margin: 28px 0 20px;
+  }
+  .faq-cat-btn {
+    padding: 7px 18px; border-radius: 20px; border: 1.5px solid var(--gray-200,#dceee4);
+    background: #fff; cursor: pointer; font-size: .85rem; font-weight: 600;
+    color: var(--muted,#5a7a66); transition: all .2s;
+  }
+  .faq-cat-btn.active, .faq-cat-btn:hover {
+    background: var(--gold,#c9a84c); border-color: var(--gold,#c9a84c); color: #0c3320;
+  }
+
+  .faq-list { margin-top: 8px; }
+  .faq-item {
+    border: 1px solid var(--gray-200,#dceee4);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(12,50,32,.04);
+  }
+  .faq-question {
+    width: 100%; text-align: left;
+    background: none; border: none; cursor: pointer;
+    padding: 18px 20px;
+    font-size: .97rem; font-weight: 700;
+    color: var(--text,#0c2818);
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    transition: background .2s;
+  }
+  .faq-question:hover { background: var(--gray-100,#f0f7f3); }
+  .faq-question .faq-arrow {
+    font-size: 1.1rem; transition: transform .3s; flex-shrink: 0; color: var(--gold,#c9a84c);
+  }
+  .faq-question[aria-expanded="true"] .faq-arrow { transform: rotate(180deg); }
+  .faq-answer {
+    display: none;
+    padding: 0 20px 18px;
+    line-height: 1.85;
+    color: var(--gray-700,#253d30);
+    font-size: .95rem;
+    border-top: 1px solid var(--gray-100,#f0f7f3);
+    padding-top: 14px;
+  }
+  .faq-answer.open { display: block; }
+  .faq-answer .hours-grid {
+    display: flex; flex-direction: column; gap: 6px; margin-top: 10px;
+    background: var(--gray-100,#f0f7f3); border-radius: 10px; padding: 14px 16px;
+  }
+  .faq-answer .hours-row {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: .9rem;
+  }
+  .faq-answer .hours-row .day { font-weight: 600; color: var(--text,#0c2818); }
+  .faq-answer .hours-row .time { color: var(--gold,#c9a84c); font-weight: 700; }
+  .faq-answer .hours-row .closed { color: var(--muted,#5a7a66); }
+
+  .faq-cta-box {
+    background: linear-gradient(135deg,#0c3320,#1b6b45);
+    border-radius: 16px; padding: 36px;
+    text-align: center; color: #fff; margin-top: 40px;
+  }
+  .faq-cta-box h3 { color: var(--gold,#c9a84c); margin-bottom: 10px; font-size: 1.2rem; }
+  .faq-cta-box p  { color: rgba(255,255,255,.8); margin-bottom: 24px; line-height: 1.7; }
+  .faq-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .faq-cta-btns a {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 10px; font-weight: 700; text-decoration: none; font-size: .93rem; transition: all .3s;
+  }
+  .btn-rdv { background: var(--gold,#c9a84c); color: #0c3320; }
+  .btn-rdv:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201,168,76,.4); }
+  .btn-wa  { border: 2px solid rgba(255,255,255,.4); color: #fff; }
+  .btn-wa:hover { background: rgba(255,255,255,.1); }
+
+  @media (max-width: 767px) {
+    .faq-hero { padding: 36px 16px; }
+    .faq-question { font-size: .92rem; padding: 14px 16px; }
+    .faq-answer { padding-left: 16px; padding-right: 16px; }
+    .faq-cta-box { padding: 24px 16px; }
+  }
+</style>
+</head>
+<body>
+<!-- Bandeau téléphone cliquable -->
+<div style="background:var(--gold,#c9a84c);color:#0c3320;text-align:center;padding:6px 16px;font-size:.82rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+  <span>📞 <a href="tel:+22897989001" style="color:#0c3320;font-weight:700;text-decoration:none">+228 97 98 90 01</a></span>
+  <span>•</span>
+  <span>💬 <a href="https://wa.me/22897989001" target="_blank" style="color:#0c3320;font-weight:700;text-decoration:none">WhatsApp</a></span>
+  <span>•</span>
+  <span>🕐 Mar–Sam : 08h–18h</span>
+</div>
+
+<a href="#main-content" class="skip-to-content" style="position:absolute;top:-100px;left:16px;background:var(--gold,#c9a84c);color:#0c3320;padding:10px 20px;border-radius:0 0 8px 8px;font-weight:700;z-index:99999;transition:top .2s;text-decoration:none" onblur="this.style.top='-100px'" onfocus="this.style.top='0'">Aller au contenu principal</a>
+
+<header class="header">
+  <div class="container">
+    <div class="brand">
+      <img src="assets/logo-transparent.png" alt="MiraLocks Logo" width="48" height="48" loading="eager">
+      <div><h1>MiraLocks</h1></div>
+    </div>
+    <button class="hamburger-menu" id="hamburger-btn" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="gallery.html">Galerie</a>
+      <a href="blog.html">Blog</a>
+      <a href="services.html">Services</a>
+      <a href="rendezvous.html">Rendez‑vous</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html" aria-current="page" class="active">FAQ</a>
+      <a href="avis.html">Avis</a>
+      <a href="about.html">À propos</a>
+    </nav>
+  </div>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<main id="main-content">
+  <div class="faq-hero">
+    <h2>❓ Questions fréquentes</h2>
+    <p>Toutes les réponses à vos questions sur MiraLocks</p>
+  </div>
+
+  <div class="container" style="padding-top:36px;padding-bottom:60px">
+
+    <div class="faq-categories" role="group" aria-label="Filtrer par catégorie">
+      <button class="faq-cat-btn active" onclick="filterFaq('all',this)">Toutes</button>
+      <button class="faq-cat-btn" onclick="filterFaq('horaires',this)">Horaires</button>
+      <button class="faq-cat-btn" onclick="filterFaq('rdv',this)">Rendez-vous</button>
+      <button class="faq-cat-btn" onclick="filterFaq('tarifs',this)">Tarifs</button>
+      <button class="faq-cat-btn" onclick="filterFaq('services',this)">Services</button>
+      <button class="faq-cat-btn" onclick="filterFaq('acces',this)">Accès</button>
+    </div>
+
+    <div class="faq-list" id="faq-list">
+
+      <!-- HORAIRES -->
+      <div class="faq-item" data-cat="horaires">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          🕐 Quels sont vos horaires d'ouverture ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <div class="hours-grid">
+            <div class="hours-row"><span class="day">🗓️ Mardi – Samedi</span><span class="time">8h à 18h</span></div>
+            <div class="hours-row"><span class="day">☀️ Dimanche</span><span class="closed">Fermé</span></div>
+            <div class="hours-row"><span class="day">🌙 Lundi</span><span class="closed">Fermé</span></div>
+          </div>
+          <p style="margin-top:12px">Pour les urgences ou les demandes hors horaires, n'hésitez pas à nous envoyer un message WhatsApp — nous répondons dès que possible.</p>
+        </div>
+      </div>
+
+      <!-- RDV -->
+      <div class="faq-item" data-cat="rdv">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          📅 Comment prendre rendez-vous ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Vous avez deux options pour prendre rendez-vous :</p>
+          <ul style="margin-top:8px;line-height:2">
+            <li>📱 <strong>En ligne</strong> : via notre <a href="rendezvous.html" style="color:var(--gold,#c9a84c);font-weight:700">formulaire de rendez-vous</a></li>
+            <li>💬 <strong>WhatsApp</strong> : en nous envoyant un message au <a href="https://wa.me/22897989001" target="_blank" style="color:var(--gold,#c9a84c);font-weight:700">+228 97 98 90 01</a></li>
+          </ul>
+          <p style="margin-top:10px">Chaque rendez-vous est confirmé par WhatsApp dans les 24h.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="rdv">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          ❌ Que faire si je dois annuler ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Merci de nous prévenir <strong>au moins 24h à l'avance</strong> via WhatsApp si vous devez annuler ou reporter votre rendez-vous. En cas de retard de plus de 15 minutes, le rendez-vous peut être annulé pour respecter le planning des autres clients.</p>
+        </div>
+      </div>
+
+      <!-- TARIFS -->
+      <div class="faq-item" data-cat="tarifs">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          💰 Combien coûte la création de locks ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nos tarifs dépendent de la longueur et de la densité des cheveux :</p>
+          <ul style="margin-top:8px;line-height:2">
+            <li>🌱 Création de locks : <strong>à partir de 15 000 FCFA</strong></li>
+            <li>✂️ Entretien / Retouches : <strong>à partir de 5 000 FCFA</strong></li>
+            <li>🔧 Réparation : <strong>sur devis</strong></li>
+            <li>🎨 Coloration & fusion : <strong>sur devis</strong></li>
+          </ul>
+          <p style="margin-top:10px">Consultez notre <a href="services.html" style="color:var(--gold,#c9a84c);font-weight:700">page Services</a> pour les tarifs complets.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="tarifs">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          💳 Quels modes de paiement acceptez-vous ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nous acceptons les paiements en <strong>espèces</strong> et par <strong>Mobile Money</strong> (Flooz, T-Money). Le paiement s'effectue à la fin de la prestation.</p>
+        </div>
+      </div>
+
+      <!-- SERVICES -->
+      <div class="faq-item" data-cat="services">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          🌿 Quels produits utilisez-vous ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nous utilisons exclusivement des produits <strong>100% naturels</strong>, soigneusement sélectionnés pour respecter la santé de vos cheveux et de votre cuir chevelu. Nos produits sont adaptés à tous les types de locks.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="services">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          💧 Dois-je venir avec les cheveux propres ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Oui, nous vous demandons de venir avec les <strong>cheveux propres et sans produit gras</strong>. Cela garantit de meilleurs résultats et une tenue optimale de vos locks.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="services">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          ⏳ Combien de temps dure une séance ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>La durée varie selon le service :</p>
+          <ul style="margin-top:8px;line-height:2">
+            <li>🌱 Création de locks : <strong>3 à 6 heures</strong> selon la longueur</li>
+            <li>✂️ Entretien mensuel : <strong>1h30 à 3 heures</strong></li>
+            <li>🔧 Réparation : <strong>variable selon l'étendue</strong></li>
+          </ul>
+          <p style="margin-top:10px">Nous vous donnerons une estimation précise lors de la prise de rendez-vous.</p>
+        </div>
+      </div>
+
+      <!-- ACCÈS -->
+      <div class="faq-item" data-cat="acces">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          📍 Où êtes-vous situés ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>L'Institut MiraLocks est situé à :</p>
+          <p style="margin-top:8px;font-weight:700">📌 Agoe Cacaveli, près de l'école La Source, en face du terrain — Lomé, Togo</p>
+          <p style="margin-top:10px">Pour plus de détails et un itinéraire, consultez notre <a href="contact.html" style="color:var(--gold,#c9a84c);font-weight:700">page Contact</a>.</p>
+        </div>
+      </div>
+
+      <div class="faq-item" data-cat="acces">
+        <button class="faq-question" aria-expanded="false" onclick="toggleFaq(this)">
+          🚌 Comment se rendre à MiraLocks ?
+          <span class="faq-arrow">▼</span>
+        </button>
+        <div class="faq-answer">
+          <p>Nous sommes accessibles par les transports en commun et en taxi. En voiture, des places de stationnement sont disponibles à proximité. N'hésitez pas à nous contacter par WhatsApp pour obtenir des indications précises depuis votre position.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="faq-cta-box">
+      <h3>Votre question n'est pas ici ?</h3>
+      <p>Contactez-nous directement via WhatsApp ou prenez rendez-vous pour discuter de vos besoins.</p>
+      <div class="faq-cta-btns">
+        <a class="btn-rdv" href="rendezvous.html">📅 Prendre rendez-vous</a>
+        <a class="btn-wa" href="https://wa.me/22897989001?text=Bonjour%20MiraLocks%20j%27ai%20une%20question" target="_blank">💬 WhatsApp</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div>
+      <h3 style="color:var(--white)">INSTITUT MiraLocks</h3>
+      <small class="muted">Coiffure – Entretien de locks • Agoe Cacaveli, près de l'école La Source, en face du terrain</small>
+      <p style="margin-top:12px">© <span id="copy-year">2025</span> MiraLocks. Tous droits réservés.<script>document.getElementById("copy-year").textContent=new Date().getFullYear();</script></p>
+    </div>
+    <div>
+      <h4 style="color:var(--white)">Contact</h4>
+      <p style="margin-top:8px">
+        📞 <a href="tel:+22897989001" style="color:#b8d4c4">+228 97 98 90 01</a><br>
+        💬 <a href="https://wa.me/22897989001?text=Bonjour%20MiraLocks" target="_blank" style="color:#b8d4c4">WhatsApp</a><br>
+        📍 Agoe Cacaveli, près de l'école La Source, Lomé
+      </p>
+    </div>
+    <div>
+      <h4 style="color:var(--white)">Informations légales</h4>
+      <p style="margin-top:8px;line-height:2.2">
+        <a href="mentions-legales.html" style="color:#b8d4c4">📄 Mentions légales</a><br>
+        <a href="confidentialite.html" style="color:#b8d4c4">🔒 Confidentialité</a><br>
+        <a href="faq.html" style="color:#b8d4c4">❓ FAQ</a><br>
+        <a href="avis.html" style="color:#b8d4c4">⭐ Avis clients</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/22897989001?text=Bonjour%20MiraLocks" target="_blank" aria-label="WhatsApp">WhatsApp</a>
+<a class="admin-float" href="admin.html" title="Administration" id="admin-secret-btn" style="display:none!important;opacity:0;pointer-events:none" aria-hidden="true">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+  </svg>
+</a>
+
+<script>
+(function(){
+  document.addEventListener('keydown', function(e){
+    if(e.ctrlKey && e.shiftKey && e.key === 'A'){
+      var btn = document.getElementById('admin-secret-btn');
+      if(btn){ btn.style.cssText='display:flex!important;opacity:1;pointer-events:auto'; btn.removeAttribute('aria-hidden'); }
+    }
+  });
+
+  window.toggleFaq = function(btn) {
+    var answer = btn.nextElementSibling;
+    var expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    answer.classList.toggle('open', !expanded);
+  };
+
+  window.filterFaq = function(cat, clickedBtn) {
+    document.querySelectorAll('.faq-cat-btn').forEach(function(b){ b.classList.remove('active'); });
+    clickedBtn.classList.add('active');
+    document.querySelectorAll('.faq-item').forEach(function(item){
+      item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+    });
+  };
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js" defer></script>
+<script src="js/theme-loader.js" defer></script>
+<script src="js/hamburger-menu.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/modern-interactions.js" defer></script>
+<script src="js/analytics-tracker.js" defer></script>
+<script src="js/register-sw.js" defer></script>
+<script src="js/cookie-banner.js" defer></script>
+</body>
+</html>

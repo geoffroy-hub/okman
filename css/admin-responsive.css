@@ -1,0 +1,661 @@
+/* admin-responsive.css - Styles responsive pour la page d'administration MiraLocks */
+
+/* ===== RESPONSIVE ADMIN - TABLETTES (768px - 1024px) ===== */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .admin-container {
+        padding: 20px;
+    }
+
+    .tabs {
+        gap: 8px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    .tab {
+        min-width: 100px;
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+
+    .section h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .btn-primary,
+    .btn-danger,
+    .btn-secondary {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .blog-item {
+        padding: 18px;
+    }
+
+    .theme-presets {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .color-editor {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chart-container {
+        padding: 20px;
+    }
+}
+
+/* ===== RESPONSIVE ADMIN - MOBILES (jusqu'à 767px) ===== */
+@media (max-width: 767px) {
+    /* Container principal */
+    .admin-container {
+        padding: 15px;
+        min-height: 100vh;
+    }
+
+    /* Login box */
+    .login-box {
+        padding: 30px 20px;
+        margin: 15px;
+    }
+
+    .login-header h1 {
+        font-size: 24px;
+    }
+
+    .login-header p {
+        font-size: 14px;
+    }
+
+    /* Tabs navigation */
+    .tabs {
+        display: flex;
+        gap: 5px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+    .tabs::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .tabs::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .tabs::-webkit-scrollbar-thumb {
+        background: #1b6b45;
+        border-radius: 2px;
+    }
+
+    .tab {
+        min-width: 90px;
+        padding: 10px 12px;
+        font-size: 13px;
+        flex-shrink: 0;
+        border-radius: 8px;
+    }
+
+    /* Sections */
+    .section {
+        padding: 15px;
+    }
+
+    .section h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .section h3 {
+        font-size: 18px;
+        margin-bottom: 12px;
+        margin-top: 20px;
+    }
+
+    /* Forms */
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* 16px pour éviter le zoom sur iOS */
+        padding: 14px;
+        border-radius: 8px;
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+    }
+
+    /* Buttons */
+    .btn-primary,
+    .btn-danger,
+    .btn-secondary,
+    .btn-login {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 15px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    /* Gallery grid */
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .gallery-item {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .gallery-item .actions {
+        padding: 8px;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .gallery-item .actions button {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    /* Blog items */
+    .blog-list {
+        gap: 12px;
+    }
+
+    .blog-item {
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .blog-item h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .blog-item p {
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+
+    .blog-item .blog-meta {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .blog-item .blog-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .blog-item .blog-actions button {
+        width: 100%;
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    /* Theme presets */
+    .theme-presets {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .theme-preset {
+        padding: 15px;
+    }
+
+    .theme-preset .preset-name {
+        font-size: 14px;
+    }
+
+    .theme-preset .color-swatches {
+        gap: 8px;
+    }
+
+    .theme-preset .color-swatch {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* Color editor */
+    .color-editor {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .color-input-group {
+        padding: 15px;
+    }
+
+    .color-input-group label {
+        font-size: 13px;
+    }
+
+    .color-input-group input {
+        height: 50px;
+        border-radius: 8px;
+    }
+
+    /* Dashboard stats */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 18px;
+    }
+
+    .stat-card .value {
+        font-size: 28px;
+    }
+
+    .stat-card .label {
+        font-size: 12px;
+    }
+
+    /* Charts */
+    .chart-container {
+        padding: 18px;
+        margin-bottom: 20px;
+    }
+
+    .chart-container h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    #visitChart {
+        height: 220px;
+    }
+
+    /* Device stats */
+    .device-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .device-stat {
+        padding: 12px;
+    }
+
+    .device-stat .value {
+        font-size: 20px;
+    }
+
+    /* Content updates */
+    .content-updates {
+        padding: 18px;
+    }
+
+    .update-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 0;
+        gap: 10px;
+    }
+
+    .update-item .left {
+        gap: 12px;
+    }
+
+    .update-item .icon {
+        font-size: 20px;
+    }
+
+    .update-item .info h4 {
+        font-size: 14px;
+    }
+
+    .update-item .info p {
+        font-size: 12px;
+    }
+
+    .update-item .badge {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Top pages */
+    .top-pages {
+        padding: 18px;
+    }
+
+    .page-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 10px 0;
+    }
+
+    .page-item .page-name {
+        font-size: 14px;
+    }
+
+    .page-item .page-count {
+        width: 100%;
+        text-align: center;
+        padding: 6px 12px;
+    }
+
+    /* Status messages */
+    .status-message {
+        font-size: 14px;
+        padding: 12px 15px;
+        margin-top: 12px;
+        border-radius: 8px;
+    }
+
+    /* File upload */
+    input[type="file"] {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Refresh button */
+    .refresh-btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    /* Logout button */
+    .logout-btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    /* Header admin */
+    .admin-header {
+        padding: 15px;
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .admin-header h1 {
+        font-size: 20px;
+    }
+
+    /* Empty states */
+    .empty-state {
+        padding: 30px 15px;
+        font-size: 14px;
+    }
+
+    .empty-state .icon {
+        font-size: 48px;
+    }
+
+    /* Loading spinner */
+    .loading {
+        padding: 30px 15px;
+    }
+
+    .loading-spinner {
+        width: 35px;
+        height: 35px;
+    }
+
+    /* Preview containers */
+    .preview-container {
+        margin-top: 15px;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .preview-image,
+    .preview-video {
+        max-width: 100%;
+        height: auto;
+        max-height: 250px;
+        border-radius: 8px;
+    }
+}
+
+/* ===== TRÈS PETITS ÉCRANS (< 380px) ===== */
+@media (max-width: 380px) {
+    .admin-container {
+        padding: 10px;
+    }
+
+    .login-box {
+        padding: 25px 15px;
+        margin: 10px;
+    }
+
+    .login-header h1 {
+        font-size: 22px;
+    }
+
+    .tab {
+        min-width: 80px;
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+
+    .section h2 {
+        font-size: 18px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+        height: 220px;
+    }
+
+    .stat-card .value {
+        font-size: 24px;
+    }
+
+    #visitChart {
+        height: 180px;
+    }
+}
+
+/* ===== OPTIMISATIONS TOUCH ===== */
+@media (hover: none) and (pointer: coarse) {
+    /* Augmenter la zone de touch pour tous les boutons */
+    .tab,
+    .btn-primary,
+    .btn-danger,
+    .btn-secondary,
+    .btn-login,
+    .refresh-btn,
+    .logout-btn {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Feedback tactile */
+    .tab:active,
+    .btn-primary:active,
+    .btn-danger:active,
+    .btn-secondary:active,
+    .theme-preset:active {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+
+    /* Désactiver les effets hover sur tactile */
+    .tab:hover,
+    .btn-primary:hover,
+    .btn-danger:hover,
+    .theme-preset:hover,
+    .gallery-item:hover,
+    .blog-item:hover,
+    .stat-card:hover {
+        transform: none;
+    }
+}
+
+/* ===== LANDSCAPE MODE SUR MOBILES ===== */
+@media (max-width: 767px) and (orientation: landscape) {
+    .admin-container {
+        padding: 10px;
+    }
+
+    .tabs {
+        margin-bottom: 10px;
+    }
+
+    .section {
+        padding: 10px;
+    }
+
+    .section h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .gallery-item img,
+    .gallery-item video {
+        height: 150px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #visitChart {
+        height: 180px;
+    }
+}
+
+/* ===== PRINT STYLES POUR ADMIN ===== */
+@media print {
+    .tabs,
+    .btn-primary,
+    .btn-danger,
+    .btn-secondary,
+    .logout-btn,
+    .refresh-btn,
+    .gallery-item .actions,
+    .blog-item .blog-actions {
+        display: none !important;
+    }
+
+    .admin-container {
+        padding: 0;
+    }
+
+    .section {
+        page-break-inside: avoid;
+    }
+
+    .chart-container {
+        page-break-inside: avoid;
+    }
+}
+
+/* ===== DARK MODE (optionnel, à activer si nécessaire) ===== */
+@media (prefers-color-scheme: dark) {
+    /* Ajouter les styles dark mode si souhaité */
+}
+
+/* ===== ANIMATIONS RÉDUITES POUR ACCESSIBILITÉ ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ===== SCROLLBAR PERSONNALISÉE ===== */
+.tabs::-webkit-scrollbar {
+    height: 6px;
+}
+
+.tabs::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.tabs::-webkit-scrollbar-thumb {
+    background: #1b6b45;
+    border-radius: 3px;
+}
+
+.tabs::-webkit-scrollbar-thumb:hover {
+    background: #0c3320;
+}
+
+/* Pour Firefox */
+.tabs {
+    scrollbar-width: thin;
+    scrollbar-color: #1b6b45 #e8f5ee;
+}

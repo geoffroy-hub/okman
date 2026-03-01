@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page introuvable – MiraLocks</title>
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<meta name="description" content="Page introuvable – Retournez à l'accueil de l'Institut MiraLocks.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/optimize.css">
+<script src="js/dynamic-colors.js"></script>
+<style>
+  .error-page {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .error-code {
+    font-size: clamp(5rem, 20vw, 10rem);
+    font-weight: 900;
+    line-height: 1;
+    background: var(--gold-gradient, linear-gradient(135deg,#c9a84c,#e8d080,#c9a84c));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .error-emoji { font-size: clamp(3rem, 10vw, 5rem); margin-bottom: 20px; display: block; }
+  .error-title { font-size: clamp(1.4rem, 4vw, 2rem); margin-bottom: 12px; color: var(--text, #0c2818); }
+  .error-desc  { color: var(--muted, #5a7a66); font-size: 1.05rem; max-width: 500px; line-height: 1.7; margin-bottom: 32px; }
+  .error-links { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .error-links a.cta { padding: 14px 28px; font-size: 1rem; }
+  .error-links a.secondary {
+    padding: 13px 24px;
+    border: 2px solid var(--gold, #c9a84c);
+    border-radius: 10px;
+    color: var(--gold, #c9a84c);
+    font-weight: 700;
+    text-decoration: none;
+    transition: all .3s;
+    font-size: 1rem;
+  }
+  .error-links a.secondary:hover { background: var(--gold, #c9a84c); color: #0c3320; }
+  .quick-links {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    max-width: 700px;
+    width: 100%;
+  }
+  .quick-link-card {
+    background: var(--gray-100, #f0f7f3);
+    border-radius: 12px;
+    padding: 20px;
+    text-decoration: none;
+    color: var(--text, #0c2818);
+    transition: all .3s;
+    border: 1px solid var(--gray-200, #dceee4);
+  }
+  .quick-link-card:hover {
+    background: #fff;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(12,50,32,.1);
+  }
+  .quick-link-card .ql-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .quick-link-card h4 { font-size: .95rem; margin-bottom: 4px; color: var(--text); }
+  .quick-link-card p  { font-size: .82rem; color: var(--muted); margin: 0; }
+  #countdown { font-weight: 700; color: var(--gold, #c9a84c); }
+</style>
+<link rel="canonical" href="https://www.miralocks.com/404.html">
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+<header class="header">
+  <div class="container">
+    <div class="brand">
+      <img src="assets/logo-transparent.png" alt="MiraLocks Logo" width="48" height="48" loading="eager">
+      <div><h1>MiraLocks</h1></div>
+    </div>
+    <button class="hamburger-menu" id="hamburger-btn" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="main-nav" role="navigation" aria-label="Navigation principale">
+      <a href="index.html">Accueil</a>
+      <a href="gallery.html">Galerie</a>
+      <a href="blog.html">Blog</a>
+      <a href="services.html">Services</a>
+      <a href="rendezvous.html">Rendez‑vous</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <a href="avis.html">Avis</a>
+      <a href="about.html">À propos</a>
+    </nav>
+  </div>
+</header>
+<div class="nav-overlay" id="nav-overlay"></div>
+
+<main>
+  <div class="container error-page">
+    <span class="error-emoji">💇</span>
+    <div class="error-code">404</div>
+    <h2 class="error-title">Oups ! Cette page a perdu ses locks…</h2>
+    <p class="error-desc">
+      La page que vous recherchez n'existe pas ou a été déplacée.
+      Pas d'inquiétude — retournez à l'accueil et reprenez votre chemin !
+    </p>
+    <p class="muted" style="margin-bottom:20px;font-size:.9rem">
+      Redirection automatique dans <span id="countdown">10</span> secondes…
+    </p>
+    <div class="error-links">
+      <a class="cta" href="index.html">🏠 Retour à l'accueil</a>
+      <a class="secondary" href="rendezvous.html">📅 Prendre RDV</a>
+    </div>
+
+    <div class="quick-links">
+      <a href="services.html" class="quick-link-card">
+        <div class="ql-icon">✂️</div>
+        <h4>Nos services</h4>
+        <p>Création, entretien, réparation</p>
+      </a>
+      <a href="gallery.html" class="quick-link-card">
+        <div class="ql-icon">🖼️</div>
+        <h4>Galerie</h4>
+        <p>Nos plus belles réalisations</p>
+      </a>
+      <a href="contact.html" class="quick-link-card">
+        <div class="ql-icon">📞</div>
+        <h4>Contact</h4>
+        <p>Appelez ou WhatsApp</p>
+      </a>
+      <a href="faq.html" class="quick-link-card">
+        <div class="ql-icon">❓</div>
+        <h4>FAQ</h4>
+        <p>Questions fréquentes</p>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div>
+      <h3 style="color:var(--white)">INSTITUT MiraLocks</h3>
+      <p style="margin-top:12px">© <span id="copy-year"></span> MiraLocks. Tous droits réservés.</p>
+    </div>
+    <div>
+      <h4 style="color:var(--white)">Contact</h4>
+      <p style="margin-top:8px">
+        📞 <a href="tel:+22897989001" style="color:#b8d4c4">+228 97 98 90 01</a><br>
+        💬 <a href="https://wa.me/22897989001" target="_blank" style="color:#b8d4c4">WhatsApp</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/22897989001?text=Bonjour%20MiraLocks" target="_blank" aria-label="WhatsApp">WhatsApp</a>
+
+<script src="js/hamburger-menu.js" defer></script>
+<script src="js/theme-loader.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js" defer></script>
+<script>
+  document.getElementById('copy-year').textContent = new Date().getFullYear();
+  // BUG 11 FIX : compte à rebours annulé si l'utilisateur clique sur un lien
+  var n = 10;
+  var el = document.getElementById('countdown');
+  var t = setInterval(function(){
+    n--;
+    if(el) el.textContent = n;
+    if(n <= 0){ clearInterval(t); window.location.href = 'index.html'; }
+  }, 1000);
+  // Annuler la redirection automatique au premier clic sur un lien
+  document.addEventListener('click', function(e) {
+    if(e.target.closest('a')) { clearInterval(t); if(el) el.parentElement.style.display = 'none'; }
+  }, { once: true });
+</script>
+<script src="js/register-sw.js" defer></script>
+<script src="js/cookie-banner.js" defer></script>
+</body>
+</html>

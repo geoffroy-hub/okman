@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Bloquer l'espace admin aux robots
+Disallow: /admin.html
+Disallow: /admin/
+
+# BUG 14 FIX : ne plus bloquer /js/ et /css/
+# Google doit pouvoir accéder aux CSS/JS pour le rendu des pages (SEO)
+# Disallow: /js/     ← SUPPRIMÉ
+# Disallow: /css/    ← SUPPRIMÉ
+
+# Sitemap
+Sitemap: https://www.miralocks.com/sitemap.xml
